@@ -1,5 +1,5 @@
-Programación de Sistemas Embebidos - Repaso de lenguaje C - Trabajo Práctico 0
-==============================================================================
+Programación de Sistemas Embebidos - Repaso de lenguaje C - LAB 0
+=================================================================
 
 Bibliografia: 
 	Brian Kernighan y Dennis Ritchie, El lenguaje de programación C (título
