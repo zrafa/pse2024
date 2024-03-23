@@ -1,0 +1,5 @@
+
+Damos las respuestas a los ejercicios en un archivo de texto plano.
+Si es código, agregaremos un README y un Makefile (además de los archivos .c y .h).
+
+
