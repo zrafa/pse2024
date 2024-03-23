@@ -30,6 +30,7 @@ este ejemplo :
 
 proyecto pse2024 raiz
                  |--------> rafael.zurita/
+                                 |-----> lab0/
                                  |-----> lab1/
                                            |-----> knight_rider/
                                            |-----> ultrasonido/
