@@ -48,8 +48,9 @@ proyecto pse2024 raiz
                  |--------> rafael.zurita/
                                  |-----> lab0/
                                  |-----> lab1/
-                                           |-----> knight_rider/
+                                           |-----> led-blink/
                                            |-----> ultrasonido/
+                                           |-----> knight_rider/
                                  |-----> lab2/
                                  |-----> lab3/
 
