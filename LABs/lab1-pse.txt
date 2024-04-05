@@ -13,8 +13,7 @@ Bibliografia:
 	Apuntes: - cadena de herramientas
 		- primer programa embebido
 
-0- Subir la resolucion del lab0 utilizando las instrucciones en el archivo
-   instrucciones.txt
+0- Subir la resolucion del lab0 utilizando lo indicado en instrucciones.txt
    del repositorio https://github.com/zrafa/pse2024/
    (subir unicamente archivos de texto plano. No subir ejecutables, pdf
    u otro tipo de archivos).
@@ -22,13 +21,18 @@ Bibliografia:
 1- Instalar un toochain para cross-compiling a AVR. Tambien avrdude.
 	¿Qué paquetes componen el toolchain para AVR en su sistema?
 
-2- a. Completar el programa hello world en C que acompaña este lab.
+2- a. Completar el programa hello world en C que acompaña este lab 
+      (carpeta led_blink/).
    b. Compilar con:
 	make clean
 	make
    c. Transferir el firmware generado al MCU con:
 	make flash
    d. Comprobar que el programa se ejecuta correctamente.
+
+
+Manejo de herramientas del toolchain
+------------------------------------
 
 3- Utilice el comando file para verificar que el archivo elf ejecutable
    generado al compilar es de la arquitectura adecuada.
