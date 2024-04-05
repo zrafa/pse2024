@@ -17,7 +17,8 @@ Nosotros agregaremos el usuario al proyecto pse2024 de github,
 para que tengamos permiso de hacer push a ese repositorio.
 
 Debe generar un token en github para poder subir cambios permanentes
-al repositorio compartido de los laboratorios (si nunca lo ha generado).
+al repositorio compartido de los laboratorios (si ya utiliza otro mecanismo 
+de autenticación a github diferente, entonces no es necesario el paso 1.).
 
 Para generar un token realizar lo siguiente:
 
@@ -77,9 +78,9 @@ git pull         # siempre un git pull antes de comenzar a trabajar
 mkdir rafael.zurita
 cd rafael.zurita
 mkdir lab1
-cp -a /tmp/lab1/ultrasonido   lab1/  # copio mi resolucion del lab1 al nuevo directorio
-                      # en este ejemplo tenía resuelto el lab1 en /tmp/lab1/
-cd lab1/ultrasonido
+cp -a /tmp/lab1/led_blink  lab1/  # copio mi resolucion del lab1 al nuevo directorio
+                      		  # en este ejemplo tenía resuelto el lab1 en /tmp/lab1/
+cd lab1/led_blink
 make clean	# nos aseguramos que no subiremos al repo remoto archivos 
 		# objetos o binarios ejecutables
 cd ../../..     # retrocedo tres directorios para posicionarme en el directorio raiz
