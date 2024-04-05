@@ -49,7 +49,6 @@ proyecto pse2024 raiz
                                  |-----> lab0/
                                  |-----> lab1/
                                            |-----> led-blink/
-                                           |-----> ultrasonido/
                                            |-----> knight_rider/
                                  |-----> lab2/
                                  |-----> lab3/
