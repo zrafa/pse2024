@@ -1,0 +1,73 @@
+LABORATORIO 0 - RESPUESTAS
+
+1. Tipos de datos básicos en C
+- char.     Ej: char letter = 'D';
+- int.      Ej: int num = 1;
+- float.    Ej: float pi = 3.14;
+- double.   Ej: float e = 2.71828;
+
+2. Word (palabra) es una unidad básica de datos (cadena finita de bits) que son manejados por la máquina.
+
+3.
+- Arquitectura de 8 bits: 2 bytes.
+- Arquitectura de 32 bits: 4 bytes.
+- Arquitectura de 64 bits: 8 bytes.
+
+4. Inicialmente definamos el valor numérico de a. En la tabla ASCII vemos que la letra 'M' es 77 (en base 10).
+
+Luego, en la primer instrucción printf se utiliza el specifier %i referente a enteros. Por lo que la salida será:
+"a = 77" seguida de un salto de línea.
+
+En la segunda instrucción printf, el specifier es %c, referente a caracteres, por lo que la salida será:
+"a = M" seguida de un salto de línea.
+
+5. Rangos numéricos:
+- j: [0,255]
+- i: En el caso de i no se especifica si el char es signed o unsigned por lo que el rango depende de la implementación del compilador. (En mi caso es signed).
+
+6. 
+
+- i: 01100001
+- j: 01001101
+- k: 01001101
+- m: 01100001
+- n: 01001101
+- p: 01000001
+
+No todas las variables fueron inicializadas con valores diferentes, sino más bien, con diferentes representaciones del mismo valor.
+
+7.1 Análisis del código:
+
+El valor final de ptr es 0xFFA0000C; ptr se asigna a la dirección del primer elemento del vector x (0xFFA00004 según el enunciado). Luego se incrementa dos veces. Como x es entero, cada elemento de x tiene 4 bytes. Por lo que en el primer incremento, ptr pasa a valer  0xFFA00008 y en el segundo 0xFFA0000C (incrementos de 4 en 4).
+
+El valor final de la variable 'a' es 21; El puntero 'b' apunta a 'a'. En la última instrucción se guarda el valor 21 en la dirección de memoria que almacena 'b' (la dirección de memoria de 'a') -> 'a' almacena 21.
+
+La dirección de x[2] es 0xFFA0000C (8 bytes más que la de x[0] y 4 bytes más que la de x[1]).
+
+7.2
+
+- Declaración de un array de enteros.
+- Se almacena el valor 99 en la posición 2 del array.
+- Se declara un puntero.
+- Se almacena la dirección de elemento cero del array en el puntero (coincidente con la dirección del array).
+- Se almacena 99 en la posición 2 del array; esto es debido a que se accede a la dirección de memoria del tercer elemento del array tomando la dirección del primer elemento y sumando 2 *(pointer+2), luego en esa dirección se almacena 99, por lo que no hay cambios debido a que ya había un 99.
+- En el puntero declarado se almacena la dirección del array; esto es debido a que los identificadores de arrays son en esencia, punteros. Por esto, tampoco hay cambios ya que el puntero ya almacenaba la dirección de memoria del array.
+
+8.1 La operación shift (byte << n) desplaza todos los bits n dígitos hacia la izquierda de forma circular.
+
+8.2 Negar una operación shift: ~(byte << n) desplazará todos los bits n dígitos hacia la izquierda y luego invertirá uno a uno cada bit.
+
+8.3 Resuelto en código.
+
+8.4 0000 1011
+
+8.5 Resuelto en código
+
+8.6 Resuelto en código
+
+8.7 Resuelto en código
+
+9. Las operaciones se resuelven en int32. Por la forma en la que están colocados los paréntesis el orden de resolución es:
+- resolver 190 * 500 = 95000
+- downcast a unsigned char -> (últimos 8 bits de 95000) 24.
+- Resolver 24 / 190 = 0
