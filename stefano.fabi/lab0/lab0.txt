@@ -1,0 +1,167 @@
+0. Resuelto en el archivo ej0.c
+
+1. Tabla de los tipos de datos en C
+
+Tipo de dato			Representación						Ejemplo
+int				numeros enteros						int a
+float				numeros flotantes de presicion simple			float x
+double				numeros flotantes de presicion doble			double x
+char				caracter individual ascii 				char a
+void x				ausencia del tipo de dato				void function()
+short				numeros enteros cortos					short x
+long				numeros enteros largos					long x
+long long			numeros enteros mas largos				long long z
+	
+
+2. La palabra "word" se refiere a una unidad de datos básica con un tamaño específico que la arquitectura de la computadora puede manejar 
+y procesar en una sola operación. El tamaño de una palabra está determinado por la arquitectura del procesador. 
+
+Típicamente la mayoría de los registros del procesador tienen el mismo tamaño de la palabra.
+ 
+3. 
+
+8 bits: segun gcc es probable que int tenga 16 bits (deberia ocupar dos registros del procesador)
+32 bits: en una arquitectura x86 una variable int en gcc es de 32 bits
+64 bits: sigue siendo 32 bits aunque podemos especificar enteros de 64 bits
+
+
+4.
+
+%i se utiliza para imprimir valores enteros
+%c se utiliza para imprimir caracteres
+
+El valor numérico de "a" es 77 porque corresponde a su valor ASCII
+
+
+5. 
+
+El tamaño de un char es de 8 bits en memoria
+
+El rango numérico de "i" puede ir desde -128 a 127 
+El rango numérico de "j" al ser sin signo puede ir de 0 a 255
+
+
+6. 
+Linea de codigo				Valor binario			Salida
+char i = 'a';				01100001			tiene valor 97
+char j = 77;				01001101			letra M
+char k = 0x4D;				01001101			77 en hexa es M
+unsigned char m = 'a';			01100001			igual que i
+unsigned char n = 0x4d;			01001101			igual que k
+unsigned char p = 'A';			01000001			65
+
+
+7. 
+
+a) 
+Al comienzo, ptr apunta a x[0]. Luego se incrementa dos veces, por lo que al final apunta a x[2]. 
+Por lo tanto, el valor final del contenido de ptr al finalizar el programa será la dirección de x[2], que es 0xFFA0000C.
+
+b) 
+Al principio, a tiene el valor 5. Luego se cambia su valor a 21 mediante el puntero b. 
+Por lo tanto, el valor final de la variable al finalizar el programa será 21.
+
+c) 
+Al comienzo del programa, se asumió que la dirección de x es 0xFFA00004. 
+Como cada elemento del arreglo x es de tipo int, x[2] estará a 2 * 4 bytes (tamaño de un int) = 8 bytes de x[0]. 
+Por lo tanto, la dirección de x[2] será 0xFFA00004 + 8 = 0xFFA0000C.
+
+7.2.
+
+Linea de codigo				Explicacion
+unsigned int array[5];			crea un array de 5 elementos con tipo de dato entero sin signo
+array[2] = 99;				asigna a la posición 2 del array el número 99
+unsigned int *pointer;			crea un puntero tipo entero sin signo
+pointer = &array[0];			el puntero se asigna o apunta al primer elemento del array
+*(pointer+2) = 99;			desde el puntero que está en el inicio del array, avanza dos posiciones, es array[2] = 99 
+pointer = array;			esto hace que pointer apunte al primer elemento del array
+
+Arreglo final:
+[0, 0, 99, 0, 0]
+
+8. 
+
+8.1 Resuelto en codigo ej8.1.c
+
+8.2 Resuelto en codigo ej8.2.c
+
+8.3.
+
+Linea de codigo				Explicacion
+#define BIT3 3				especifica un nombre con el valor 3
+unsigned char status;			crea una variable caracter sin signo
+status = 0b00110101;			se inicializa status con el valor 00110101 . 0b representa el número binario en base 2
+status = status | 0xFA;			se realiza una operación OR entre status y el valor hexa FA (en binario: 11111010)
+status = status & 20;			se hace una operación AND entre status y 20 (en binario: 10100)
+status |= (1 << 6);			Se establece el sexto bit de status a 1 utilizando una operación OR con un 1 desplazado 6 veces a la izquierda (en binario: 01000000).
+status &= ~(1 << BIT3)			Se borra el bit en la posición definida por BIT3 (es decir, el tercer bit) en status. Se hace esto creando un valor con un 1 desplazado tres veces a la izquierda y luego negándolo quedando 1s en todas partes excepto en la posición del tercer bit. Luego, se realiza una operación AND bit a bit con status, borrando el bit en la posición del tercer bit.
+status |= (1 << BIT3)			Se establece en 1 el tercer bit en status
+
+
+8.4.
+
+bit7	bit6	bit5	bit4	bit3	bit2	bit1	bit0
+0	0	0	0	1	0	1	1
+
+
+8.5. Resuelto en codigo
+
+
+Operacion		bit7	bit6	bit5	bit4	bit3	bit2	bit1	bit0
+x			0	0	0	0	1	0	1	1
+
+# prendemos el tercer bit
+1  <<  3		0	0	0	0	1	0	0	0
+
+# hacemos una operacion AND entre ambas variables
+AND			0	0	0	0	1	0	0	0
+
+
+
+8.6. Resuelto en codigo ej8.6.c
+
+Posible forma?? mas larga
+x
+x >> 3
+x << 3
+
+
+
+Operacion	bit7	bit6	bit5	bit4	bit3	bit2	bit1	bit0
+x		0	0	0	0	1	0	1	1
+y		0	0	0	0	0	1	1	1
+
+# negamos y
+~ y		1	1	1	1	1	0	0	0
+
+# hacemos una operacion and entre x y la negacion de y
+x & ~y		0	0	0	0	1	0	0	0
+
+
+
+8.7. Resuelto en codigo ej8.7.c
+
+
+9. 
+
+1. En el estándar de C , un char son 8 bits.
+
+2. La multiplicación puede desbordar el rango de unsigned char que va de 0 a 255. 
+Ya que el compilador podría crear una variable auxiliar para almacenar este valor en un registro de 8 bits. 
+Entonces var * 500 va exceder potencialmente 255.
+
+3. Luego se trunca a unsigned char lo que podría truncar aún más cualquier resultado que se haya excedido en el rango de unsigned char. 
+El valor va ser 24
+
+4. Finalmente se divide el resultado por 190. 
+Como el valor da con decimal se trunca el valor completo y devuelve 0.
+
+
+10. Resuelto en codigo ej10.c
+
+
+
+
+
+
+
