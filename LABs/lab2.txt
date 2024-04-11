@@ -16,8 +16,10 @@ contador_binario/	(entrada digital - pulsador)
 	Se presiona nuevamente el pulsador y se continua el conteo.
 
 ultrasonido/ 
+	Utilizando lab2_delay.txt implementar delay_us(int n);
+	Utilizar el hello world con delay_us(n) para
+        obtener frecuencias de pruebas. Verificar con el osciloscopio.
 	Control de un sensor digital de ultrasonido.
-	Implementación de delay_10us(); y de delay_ms(n);
 	Reporta via serial la distancia del objeto detectado.
 
 melody/
