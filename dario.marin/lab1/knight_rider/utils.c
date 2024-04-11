@@ -8,11 +8,6 @@
 
 
 #define LED  0x20
-#define LED_0 0x0
-#define LED_1 0x2
-#define LED_2 0x4
-#define LED_3 0x8
-#define LED_4 0x10
 
 /* puertos de E/S */
 
