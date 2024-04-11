@@ -24,7 +24,14 @@ ultrasonido/
 	Desarrollar el control de un sensor digital de ultrasonido HC-SR04
 	utilizando la informacion de referencia de la pagina web
         (especificamente pagina 6 :)
-	Reportar via serial la distancia del objeto detectado en cm.
+
+	En la carpeta ultrasound/ se encuentra el código esqueleto
+        para este trabajo. Viene con una biblioteca serial para poder
+        enviar por el serial del arduino (a nuestra notebook) información
+        en texto plano (asciis). El código esqueleto tiene un ejemplo.
+
+	Este programa debe reportar via serial la distancia del 
+	objeto detectado en cm.
 
 melody/
 	Controlar un piezo speaker utilizando un pin digital.
