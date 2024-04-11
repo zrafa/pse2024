@@ -1,0 +1,32 @@
+Programación de Sistemas Embebidos
+
+Entrada y Salidas Digitales
+---------------------------
+
+El laboratorio 2 está compuesto de tres proyectos:
+
+contador_binario/	(entrada digital - pulsador)
+	Implementación del Control de pulsador. Configuración de pullpup, 
+	Implementar con los leds un contadora binario de 5 bits.
+	Simplemente se debe contar dejando un delay de unos 300ms
+	entre valor y valor.
+
+	Se presiona el pulsador (conectado a un pin del puerto C)
+	se detiene el conteo.
+	Se presiona nuevamente el pulsador y se continua el conteo.
+
+ultrasonido/ 
+	Control de un sensor digital de ultrasonido.
+	Implementación de delay_10us(); y de delay_ms(n);
+	Reporta via serial la distancia del objeto detectado.
+
+melody/
+	Controlar un piezo speaker utilizando un pin digital.
+	Buscar la frecuencias de las notas musicales para una octava.
+	Implementar la reproducción de una nota utilizando el control
+	de la frecuencia de períodos de una señal digital sobre un pin.
+	Buscar una melodia sencilla. Colocar las notas y duración
+	en una estructura de datos (por ej. un arreglo).
+	Desarrollar un reproductor elegante para la melodia.
+	
+	
