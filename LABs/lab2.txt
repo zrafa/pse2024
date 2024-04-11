@@ -11,9 +11,9 @@ contador_binario/	(entrada digital - pulsador)
 	Simplemente se debe contar dejando un delay de unos 300ms
 	entre valor y valor.
 
-	Se presiona el pulsador (conectado a un pin del puerto C)
+	Si se presiona el pulsador (conectado a un pin del puerto C)
 	se detiene el conteo.
-	Se presiona nuevamente el pulsador y se continua el conteo.
+	Si se presiona nuevamente el pulsador entonces continua el conteo.
 
 ultrasonido/ 
 	Utilizando lab2_delay.txt implementar delay_us(int n);
@@ -30,8 +30,10 @@ ultrasonido/
         enviar por el serial del arduino (a nuestra notebook) información
         en texto plano (asciis). El código esqueleto tiene un ejemplo.
 
-	Este programa debe reportar via serial la distancia del 
-	objeto detectado en cm.
+	Este programa debe reportar a su notebook la distancia del 
+	objeto detectado en cm. En el código esqueleto existe una
+        biblioteca para utilizar el serial y enviar información,
+        con un ejemplo.
 
 melody/
 	Controlar un piezo speaker utilizando un pin digital.
