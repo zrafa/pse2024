@@ -17,10 +17,14 @@ contador_binario/	(entrada digital - pulsador)
 
 ultrasonido/ 
 	Utilizando lab2_delay.txt implementar delay_us(int n);
+
 	Utilizar el hello world con delay_us(n) para
         obtener frecuencias de pruebas. Verificar con el osciloscopio.
-	Control de un sensor digital de ultrasonido.
-	Reporta via serial la distancia del objeto detectado.
+
+	Desarrollar el control de un sensor digital de ultrasonido HC-SR04
+	utilizando la informacion de referencia de la pagina web
+        (especificamente pagina 6 :)
+	Reportar via serial la distancia del objeto detectado en cm.
 
 melody/
 	Controlar un piezo speaker utilizando un pin digital.
