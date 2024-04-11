@@ -46,9 +46,9 @@ melody/
 
 	Por ejemplo, el DO en escala 7ma tiene una frecuencia de 2093hz.
         Para lograr esa frecuencia, habría que :
-            pone_en_alto la señal
+            poner_en_alto la señal
 	    esperar 248 microsegundos
-            pone_en_bajo la señal
+            poner_en_bajo la señal
 	    esperar 248 microsegundos
 	Eso genera un período que dura 476 microsegundos.
 	En un segundo, con períodos de esa duración, habrán sucedido
