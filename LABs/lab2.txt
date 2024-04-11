@@ -44,7 +44,7 @@ melody/
 	Utilice el delay_us(n) y un pin del arduino para generar una
 	señal digital con la frecuencia necesaria. 
 
-	Por ejemplo, el DO en escala 7ma tiene una frecuencia de 2093.
+	Por ejemplo, el DO en escala 7ma tiene una frecuencia de 2093hz.
         Para lograr esa frecuencia, habría que :
             pone_en_alto la señal
 	    esperar 248 microsegundos
