@@ -1,0 +1,154 @@
+1.  • char: almacena un elemento del tamaño de un byte. Ej: char a.
+    • int: almacena un número entero con signo. Ej: int alfa.
+    • long: almacena un entero largo. Ej: long k.
+    • float: almacena un número en punto flotante. Ej: float x1.
+    • double: almacena un número en punto flotante con doble precisión. Ej: double i.
+    
+
+2. En el contexto de Arquitectura de una Computadora, la palabra Word hace referencia a 
+la unidad de datos que utiliza un procesador particular.
+
+
+3.  Arquitectura    bits de int
+      8 bits  ----> 16 bits
+      32 bits ----> 32 bits
+      64 bits ----> 32 bits
+      
+      
+4. El primer printf, printf("a = %i \n", a), imprime el código ascii que le corresponde al
+caractér almacenado en la variable a, imprime 77, ya que %i indica que se imprime un int.
+
+El segundo printf, printf("La letra %c \n", a), imprime el caractér almacenado en la variable a,
+imprime M, ya que %c indica que se imprime un char.
+
+
+5. char i rango=[-128,127]
+   unsigned char j rango=[0,255]
+    
+    
+6.  char i='a'   ---> 0110 0001   
+    char j=77    ---> 0100 1101
+    char k=0x4D  ---> 0100 1101
+    unsigned char m='a'   ---> 0110 0001
+    unsigned char n=0x4D  ---> 0100 1101
+    unsigned char p='A'   ---> 0100 0001 
+ 
+    Las variables "m" e "i" fueron inicializadas con el mismo valor.
+    Las variables "j", "k" y "n" se inicializaron con el mismo valor (el caracter M), 77 es la 
+    representación en decimal del caracter M en la tabla ascii, 0x4D es la representación 
+    hexadecimal de M en la tabla ascii. 
+
+7.1.       
+    int x[3];
+	  int *ptr;
+
+	  char a;
+	  char *b;
+
+        x[0] = 1024; (dirección: 0xFFA0 0004)
+        x[1] = 32; (dirección: 0xFFA0 0008)
+        x[2] = -1; (dirección: 0xFFA0 000C)
+	  ptr = &x[0]; (dirección: 0xFFA0 0004)
+	  ptr++; (dirección: 0xFFA0 0008)
+	  ptr++; (dirección: 0xFFA0 000C FINAL)
+
+	  a = 5; 
+	  b = &a; (b guarda la dirección de la variable a)
+
+    printf ("a=%i, lo apuntado por b=%i, el contenido de b=%X, y la direccion de b=%X \n", a, *b, b, &b);
+	
+	  *b = 21; (a la dirección que apunta b (la dirección de la variable a), se le asigna el valor 21)
+    
+  El valor final del puntero ptr es la dirección del tercer elemento del arreglo x,
+  dirección: 0xFFA0 000C.
+  El valor final de la variable 'a' es 21.
+  La dirección de la variable x[2] es 0xFFA0 000C.
+
+
+  2.  unsigned int array[5];     Se declara un arreglo de 5 elementos
+      array[2] = 99;             Al indice 2 se le asigna el valor 99
+
+      unsigned int *pointer;     Se declara un puntero
+      pointer = &array[0];       Al puntero se le asigna la dirección del primer elemento del array
+      *(pointer+2) = 99;         *(pointer+2) es equivalente a array[2], al indice 2 del array se le asigna el valor 99
+      
+      pointer = array;           Al puntero se le asigna la dirección del array
+    
+    
+8.3
+#define BIT3 3
+    unsigned char status;
+
+    status = 0b00110101;      status: 53, en binario:0 0 1 1 0 1 0 1 
+
+    status = status | 0xFA;   status: 255, en binario:1 1 1 1 1 1 1 1
+          0 0 1 1 0 1 0 1  (53)
+        | 1 1 1 1 1 0 1 0  (0xFA)
+        -------------------
+          1 1 1 1 1 1 1 1   (255)
+    Realiza una operación or entre status y 0xFA, todos los bits quedan en 1.
+
+    status = status & 20;     status: 20, en binario:0 0 0 1 0 1 0 0     
+           1 1 1 1 1 1 1 1 (255)
+         & 0 0 0 1 0 1 0 0  (20)
+         ------------------   
+           0 0 0 1 0 1 0 0  (20)
+    Realiza una operación and entre status y 20, deja los bits 2 y 4 en 1 y los demás en 0.
+
+    status |= (1 << 6);       status: 84, en binario:0 1 0 1 0 1 0 0 
+        (1 << 6) = 0000 0001 << 6 = 0100 0000 (Realiza un desplazamiento de 6 bits a la izquierda)
+        
+           0 0 0 1 0 1 0 0  (20)
+         | 0 1 0 0 0 0 0 0 
+         ------------------
+           0 1 0 1 0 1 0 0 (84)
+    Realiza un or entre status y el valor al realizar el desplazamiento, el bit 6 cambia de valor a 1.
+
+    status &= ~(1 << BIT3)    status: 84, en binario:0 1 0 1 0 1 0 0
+    (1 << BIT3) = 0000 0001 << 3 = 0000 1000 (Realiza un desplazamiento de 3 bits a la izquierda)
+    ~(1 << BIT3) = 1111 0111 (Realiza negación bit a bit del valor del desplazamiento)
+
+        0 1 0 1 0 1 0 0 (84)
+      & 1 1 1 1 0 1 1 1 
+      -------------------
+        0 1 0 1 0 1 0 0  (84)
+      Realiza la operación and entre status y el valor de la negación, se mantiene el valar anterior de status.
+
+    status |= (1 << BIT3)     status: 92, en binario:0 1 0 1 1 1 0 0
+    (1 << BIT3) = 0000 0001 << 3 = 0000 1000 (Realiza un desplazamiento de 3 bits a la izquierda)
+
+         0 1 0 1 0 1 0 0  (84)
+       | 0 0 0 0 1 0 0 0
+       -------------------
+         0 1 0 1 1 1 0 0 (92) 
+        Realiza la operación or entre status y el valor del desplazamiento, el bit 3 pasa a tener valor 1.
+
+
+8.4 11 = 0000 1011 
+Bit 7: 0
+Bit 6: 0
+Bit 5: 0
+Bit 4: 0
+Bit 3: 1
+Bit 2: 0
+Bit 1: 1
+Bit 0: 1
+
+9.  unsigned char RES;
+    unsigned char var;
+    var = 190;
+    RES = (unsigned char)(var * 500) /190;    
+
+    Las variables RES y var al ser de tipo char tienen un tamaño de 8 bits y pueden tomar valores 
+    entre 0 y 255 ya que son sin signo.
+    El resultado de (var * 500) es 500, caería fuera del rango por lo que se lo castea a unsigned char
+    dando como resultado el valor 24. Luego se realiza 24/190, que da como resultqdo 0 y se lo asigna a RES.
+    
+    
+
+    
+    
+    
+    
+    
+    
