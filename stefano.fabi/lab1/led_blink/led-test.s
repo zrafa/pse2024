@@ -44,7 +44,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e0 e3       	ldi	r30, 0x30	; 48
+  7a:	e4 e3       	ldi	r30, 0x34	; 52
   7c:	f1 e0       	ldi	r31, 0x01	; 1
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -52,8 +52,8 @@ Disassembly of section .text:
   84:	a6 30       	cpi	r26, 0x06	; 6
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
-  8a:	0e 94 8b 00 	call	0x116	; 0x116 <main>
-  8e:	0c 94 96 00 	jmp	0x12c	; 0x12c <_exit>
+  8a:	0e 94 8d 00 	call	0x11a	; 0x11a <main>
+  8e:	0c 94 98 00 	jmp	0x130	; 0x130 <_exit>
 
 00000092 <__bad_interrupt>:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -111,7 +111,7 @@ Disassembly of section .text:
   fc:	80 83       	st	Z, r24
   fe:	08 95       	ret
 
-00000100 <led_off>:
+00000100 <led_toggle>:
  100:	e0 91 04 01 	lds	r30, 0x0104	; 0x800104 <PUERTO_B>
  104:	f0 91 05 01 	lds	r31, 0x0105	; 0x800105 <PUERTO_B+0x1>
  108:	90 81       	ld	r25, Z
@@ -121,18 +121,21 @@ Disassembly of section .text:
  110:	08 95       	ret
 
 00000112 <led_on>:
- 112:	0c 94 80 00 	jmp	0x100	; 0x100 <led_off>
+ 112:	0c 94 80 00 	jmp	0x100	; 0x100 <led_toggle>
 
-00000116 <main>:
- 116:	0e 94 71 00 	call	0xe2	; 0xe2 <led_init>
- 11a:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
- 11e:	0e 94 89 00 	call	0x112	; 0x112 <led_on>
- 122:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
- 126:	0e 94 80 00 	call	0x100	; 0x100 <led_off>
- 12a:	f7 cf       	rjmp	.-18     	; 0x11a <main+0x4>
+00000116 <led_off>:
+ 116:	0c 94 80 00 	jmp	0x100	; 0x100 <led_toggle>
 
-0000012c <_exit>:
- 12c:	f8 94       	cli
+0000011a <main>:
+ 11a:	0e 94 71 00 	call	0xe2	; 0xe2 <led_init>
+ 11e:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
+ 122:	0e 94 89 00 	call	0x112	; 0x112 <led_on>
+ 126:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
+ 12a:	0e 94 8b 00 	call	0x116	; 0x116 <led_off>
+ 12e:	f7 cf       	rjmp	.-18     	; 0x11e <main+0x4>
 
-0000012e <__stop_program>:
- 12e:	ff cf       	rjmp	.-2      	; 0x12e <__stop_program>
+00000130 <_exit>:
+ 130:	f8 94       	cli
+
+00000132 <__stop_program>:
+ 132:	ff cf       	rjmp	.-2      	; 0x132 <__stop_program>

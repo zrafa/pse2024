@@ -1,0 +1,422 @@
+Programación de Sistemas Embebidos
+
+LAB  1: Cadena de herramientas y primer programa embebido
+=========================================================
+
+Bibliografia: 
+	Brian Kernighan y Dennis Ritchie, El lenguaje de programación C (título
+	original en inglés: The C Programming Language)
+
+	Eduardo Grosclaude, Taller de Lenguaje en C
+	http://se.fi.uncoma.edu.ar/pse2020/taller-c/index.html
+
+	Apuntes: - cadena de herramientas
+		- primer programa embebido
+
+0- Subir la resolucion del lab0 utilizando lo indicado en instrucciones.txt
+   del repositorio https://github.com/zrafa/pse2024/
+   (subir unicamente archivos de texto plano. No subir ejecutables, pdf
+   u otro tipo de archivos).
+
+1- Instalar un toochain para cross-compiling a AVR. Tambien avrdude.
+	¿Qué paquetes componen el toolchain para AVR en su sistema?
+
+Mi sistema operativo es Debian Ubuntu. El comando para instalar la toolchain completa es el siguiente:
+$ sudo apt-get install gcc-avr binutils-avr avr-libc gdb-avr avrdude -y
+
+2- a. Completar el programa hello world en C que acompaña este lab 
+      (carpeta led_blink/).
+   b. Compilar con:
+	make clean
+	make
+   c. Transferir el firmware generado al MCU con:
+	make flash
+   d. Comprobar que el programa se ejecuta correctamente.
+
+
+Codigo del programa proporcionado en la carpeta led_blink
+
+Manejo de herramientas del toolchain
+------------------------------------
+
+3- Utilice el comando file para verificar que el archivo elf ejecutable
+   generado al compilar es de la arquitectura adecuada.
+
+$ file led-test 
+led-test: ELF 32-bit LSB executable, Atmel AVR 8-bit, version 1 (SYSV), statically linked, with debug_info, not stripped
+
+4- Verifique donde instaló, el sistema de paquetes de Linux, las binutils de
+   avr.
+
+Con el comando dpkg liste todos los archivos binarios de avr
+$ dpkg -L binutils-avr
+/.
+/usr
+/usr/bin
+/usr/bin/avr-addr2line
+/usr/bin/avr-c++filt
+/usr/bin/avr-elfedit
+/usr/bin/avr-gprof
+/usr/bin/avr-size
+/usr/bin/avr-strings
+/usr/lib
+/usr/lib/avr
+/usr/lib/avr/bin
+/usr/lib/avr/bin/ar
+/usr/lib/avr/bin/as
+/usr/lib/avr/bin/ld
+/usr/lib/avr/bin/ld.bfd
+/usr/lib/avr/bin/nm
+/usr/lib/avr/bin/objcopy
+/usr/lib/avr/bin/objdump
+/usr/lib/avr/bin/ranlib
+/usr/lib/avr/bin/readelf
+/usr/lib/avr/bin/strip
+/usr/lib/avr/lib
+/usr/lib/avr/lib/ldscripts
+/usr/lib/avr/lib/ldscripts/avr1.x
+/usr/lib/avr/lib/ldscripts/avr1.xbn
+/usr/lib/avr/lib/ldscripts/avr1.xn
+/usr/lib/avr/lib/ldscripts/avr1.xr
+/usr/lib/avr/lib/ldscripts/avr1.xu
+/usr/lib/avr/lib/ldscripts/avr2.x
+/usr/lib/avr/lib/ldscripts/avr2.xbn
+/usr/lib/avr/lib/ldscripts/avr2.xn
+/usr/lib/avr/lib/ldscripts/avr2.xr
+/usr/lib/avr/lib/ldscripts/avr2.xu
+/usr/lib/avr/lib/ldscripts/avr25.x
+/usr/lib/avr/lib/ldscripts/avr25.xbn
+/usr/lib/avr/lib/ldscripts/avr25.xn
+/usr/lib/avr/lib/ldscripts/avr25.xr
+/usr/lib/avr/lib/ldscripts/avr25.xu
+/usr/lib/avr/lib/ldscripts/avr3.x
+/usr/lib/avr/lib/ldscripts/avr3.xbn
+/usr/lib/avr/lib/ldscripts/avr3.xn
+/usr/lib/avr/lib/ldscripts/avr3.xr
+/usr/lib/avr/lib/ldscripts/avr3.xu
+/usr/lib/avr/lib/ldscripts/avr31.x
+/usr/lib/avr/lib/ldscripts/avr31.xbn
+/usr/lib/avr/lib/ldscripts/avr31.xn
+/usr/lib/avr/lib/ldscripts/avr31.xr
+/usr/lib/avr/lib/ldscripts/avr31.xu
+/usr/lib/avr/lib/ldscripts/avr35.x
+/usr/lib/avr/lib/ldscripts/avr35.xbn
+/usr/lib/avr/lib/ldscripts/avr35.xn
+/usr/lib/avr/lib/ldscripts/avr35.xr
+/usr/lib/avr/lib/ldscripts/avr35.xu
+/usr/lib/avr/lib/ldscripts/avr4.x
+/usr/lib/avr/lib/ldscripts/avr4.xbn
+/usr/lib/avr/lib/ldscripts/avr4.xn
+/usr/lib/avr/lib/ldscripts/avr4.xr
+/usr/lib/avr/lib/ldscripts/avr4.xu
+/usr/lib/avr/lib/ldscripts/avr5.x
+/usr/lib/avr/lib/ldscripts/avr5.xbn
+/usr/lib/avr/lib/ldscripts/avr5.xn
+/usr/lib/avr/lib/ldscripts/avr5.xr
+/usr/lib/avr/lib/ldscripts/avr5.xu
+/usr/lib/avr/lib/ldscripts/avr51.x
+/usr/lib/avr/lib/ldscripts/avr51.xbn
+/usr/lib/avr/lib/ldscripts/avr51.xn
+/usr/lib/avr/lib/ldscripts/avr51.xr
+/usr/lib/avr/lib/ldscripts/avr51.xu
+/usr/lib/avr/lib/ldscripts/avr6.x
+/usr/lib/avr/lib/ldscripts/avr6.xbn
+/usr/lib/avr/lib/ldscripts/avr6.xn
+/usr/lib/avr/lib/ldscripts/avr6.xr
+/usr/lib/avr/lib/ldscripts/avr6.xu
+/usr/lib/avr/lib/ldscripts/avrtiny.x
+/usr/lib/avr/lib/ldscripts/avrtiny.xbn
+/usr/lib/avr/lib/ldscripts/avrtiny.xn
+/usr/lib/avr/lib/ldscripts/avrtiny.xr
+/usr/lib/avr/lib/ldscripts/avrtiny.xu
+/usr/lib/avr/lib/ldscripts/avrxmega1.x
+/usr/lib/avr/lib/ldscripts/avrxmega1.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega1.xn
+/usr/lib/avr/lib/ldscripts/avrxmega1.xr
+/usr/lib/avr/lib/ldscripts/avrxmega1.xu
+/usr/lib/avr/lib/ldscripts/avrxmega2.x
+/usr/lib/avr/lib/ldscripts/avrxmega2.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega2.xn
+/usr/lib/avr/lib/ldscripts/avrxmega2.xr
+/usr/lib/avr/lib/ldscripts/avrxmega2.xu
+/usr/lib/avr/lib/ldscripts/avrxmega3.x
+/usr/lib/avr/lib/ldscripts/avrxmega3.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega3.xn
+/usr/lib/avr/lib/ldscripts/avrxmega3.xr
+/usr/lib/avr/lib/ldscripts/avrxmega3.xu
+/usr/lib/avr/lib/ldscripts/avrxmega4.x
+/usr/lib/avr/lib/ldscripts/avrxmega4.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega4.xn
+/usr/lib/avr/lib/ldscripts/avrxmega4.xr
+/usr/lib/avr/lib/ldscripts/avrxmega4.xu
+/usr/lib/avr/lib/ldscripts/avrxmega5.x
+/usr/lib/avr/lib/ldscripts/avrxmega5.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega5.xn
+/usr/lib/avr/lib/ldscripts/avrxmega5.xr
+/usr/lib/avr/lib/ldscripts/avrxmega5.xu
+/usr/lib/avr/lib/ldscripts/avrxmega6.x
+/usr/lib/avr/lib/ldscripts/avrxmega6.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega6.xn
+/usr/lib/avr/lib/ldscripts/avrxmega6.xr
+/usr/lib/avr/lib/ldscripts/avrxmega6.xu
+/usr/lib/avr/lib/ldscripts/avrxmega7.x
+/usr/lib/avr/lib/ldscripts/avrxmega7.xbn
+/usr/lib/avr/lib/ldscripts/avrxmega7.xn
+/usr/lib/avr/lib/ldscripts/avrxmega7.xr
+/usr/lib/avr/lib/ldscripts/avrxmega7.xu
+/usr/lib/avr/x86_64-linux-gnu
+/usr/lib/avr/x86_64-linux-gnu/include
+/usr/lib/avr/x86_64-linux-gnu/include/ansidecl.h
+/usr/lib/avr/x86_64-linux-gnu/include/bfd.h
+/usr/lib/avr/x86_64-linux-gnu/include/bfdlink.h
+/usr/lib/avr/x86_64-linux-gnu/include/dis-asm.h
+/usr/lib/avr/x86_64-linux-gnu/include/plugin-api.h
+/usr/lib/avr/x86_64-linux-gnu/include/symcat.h
+/usr/lib/avr/x86_64-linux-gnu/lib
+/usr/lib/avr/x86_64-linux-gnu/lib/libbfd.a
+/usr/lib/avr/x86_64-linux-gnu/lib/libbfd.la
+/usr/lib/avr/x86_64-linux-gnu/lib/libopcodes.a
+/usr/lib/avr/x86_64-linux-gnu/lib/libopcodes.la
+/usr/share
+/usr/share/doc
+/usr/share/doc/binutils-avr
+/usr/share/doc/binutils-avr/README.Debian
+/usr/share/doc/binutils-avr/changelog.Debian.gz
+/usr/share/doc/binutils-avr/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/avr-addr2line.1.gz
+/usr/share/man/man1/avr-ar.1.gz
+/usr/share/man/man1/avr-as.1.gz
+/usr/share/man/man1/avr-c++filt.1.gz
+/usr/share/man/man1/avr-dlltool.1.gz
+/usr/share/man/man1/avr-elfedit.1.gz
+/usr/share/man/man1/avr-gprof.1.gz
+/usr/share/man/man1/avr-ld.1.gz
+/usr/share/man/man1/avr-nlmconv.1.gz
+/usr/share/man/man1/avr-nm.1.gz
+/usr/share/man/man1/avr-objcopy.1.gz
+/usr/share/man/man1/avr-objdump.1.gz
+/usr/share/man/man1/avr-ranlib.1.gz
+/usr/share/man/man1/avr-readelf.1.gz
+/usr/share/man/man1/avr-size.1.gz
+/usr/share/man/man1/avr-strings.1.gz
+/usr/share/man/man1/avr-strip.1.gz
+/usr/share/man/man1/avr-windmc.1.gz
+/usr/share/man/man1/avr-windres.1.gz
+/usr/bin/avr-ar
+/usr/bin/avr-as
+/usr/bin/avr-ld
+/usr/bin/avr-ld.bfd
+/usr/bin/avr-nm
+/usr/bin/avr-objcopy
+/usr/bin/avr-objdump
+/usr/bin/avr-ranlib
+/usr/bin/avr-readelf
+/usr/bin/avr-strip
+/usr/share/man/man1/avr-ld.bfd.1.gz
+
+
+5- ¿Donde están los encabezados y las bibliotecas de C para avr?
+
+
+Los encabezados y bibliotecas de C para AVR generalmente se instalan junto con las herramientas de desarrollo AVR. Estan ubicados en /usr/avr/include para los encabezados y /usr/avr/lib para las bibliotecas.
+
+
+$ dpkg -L avr-libc
+
+6- ¿Donde se instaló el compilador avr-gcc?
+
+Con el siguiente comando puedo ver donde se encuentra el compilador avr
+$ whereis avr-gcc
+/usr/bin/avr-gcc
+
+7- a. Utilice avr-objdump para realizar un decodificado del programa binario elf
+      (obtener el código en lenguaje ensamblador AVR a partir del binario elf)
+
+$ avr-objdump -d led-test > led-test.s
+
+
+   b. Utilice el comando avr-size para obtener el espacio que ocupará
+      el programa en el sistema. ¿Cuántos bytes ocupa la sección de código?
+      ¿Y la de datos?. 
+
+
+Los datos estan en bytes:
+$ avr-size led-test
+text	   data	    bss	    dec	    hex	filename
+308	      6	      0	    314	    13a	led-test
+
+
+La sección de código ocupa 308 bytes. 
+La sección de datos 6 bytes
+
+
+8- Utilizando el programa decodificado por avr-objdump en 7- a. 
+   ¿Es el código de main() lo primero que se ejecuta en su program? 
+   ¿Puede encontrar la llamada a la función main? ¿En qué dirección comienza
+   el código de la función main? ¿Qué son todas las instrucciones anteriores
+   a main?
+
+
+Lo primero que se ejecuta en este código es la sección de vectores de interrupción, específicamente la dirección de memoria 0x00000000 donde se encuentra la etiqueta <__vectors>. Este es el punto de entrada inicial del programa. En la mayoría de los microcontroladores AVR, la dirección de memoria 0x00000000 almacena la dirección de inicio de la tabla de vectores de interrupción.
+
+En este caso, la llamada a main se encuentra en la dirección de memoria 0x11a, como se muestra en la siguiente línea:
+8a:	0e 94 8d 00 	call	0x11a	; 0x11a <main>
+
+Por lo tanto, la dirección de inicio del código de la función main es 0x11a.
+
+Todas las instrucciones anteriores a la función main se encuentran en la sección de la tabla de vectores de interrupción y en otras funciones auxiliares definidas en el código, como __do_copy_data, __bad_interrupt, esperar, led_init, led_toggle, led_on, y led_off. Estas funciones realizan diversas tareas de inicialización y configuración antes de que se ejecute la función main.
+
+
+led-test:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e4 e3       	ldi	r30, 0x34	; 52
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a6 30       	cpi	r26, 0x06	; 6
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 8d 00 	call	0x11a	; 0x11a <main>
+  8e:	0c 94 98 00 	jmp	0x130	; 0x130 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <esperar>:
+  96:	cf 93       	push	r28
+  98:	df 93       	push	r29
+  9a:	00 d0       	rcall	.+0      	; 0x9c <esperar+0x6>
+  9c:	00 d0       	rcall	.+0      	; 0x9e <esperar+0x8>
+  9e:	cd b7       	in	r28, 0x3d	; 61
+  a0:	de b7       	in	r29, 0x3e	; 62
+  a2:	19 82       	std	Y+1, r1	; 0x01
+  a4:	1a 82       	std	Y+2, r1	; 0x02
+  a6:	1b 82       	std	Y+3, r1	; 0x03
+  a8:	1c 82       	std	Y+4, r1	; 0x04
+  aa:	89 81       	ldd	r24, Y+1	; 0x01
+  ac:	9a 81       	ldd	r25, Y+2	; 0x02
+  ae:	ab 81       	ldd	r26, Y+3	; 0x03
+  b0:	bc 81       	ldd	r27, Y+4	; 0x04
+  b2:	80 3d       	cpi	r24, 0xD0	; 208
+  b4:	9d 4d       	sbci	r25, 0xDD	; 221
+  b6:	a6 40       	sbci	r26, 0x06	; 6
+  b8:	b1 05       	cpc	r27, r1
+  ba:	60 f4       	brcc	.+24     	; 0xd4 <esperar+0x3e>
+  bc:	89 81       	ldd	r24, Y+1	; 0x01
+  be:	9a 81       	ldd	r25, Y+2	; 0x02
+  c0:	ab 81       	ldd	r26, Y+3	; 0x03
+  c2:	bc 81       	ldd	r27, Y+4	; 0x04
+  c4:	01 96       	adiw	r24, 0x01	; 1
+  c6:	a1 1d       	adc	r26, r1
+  c8:	b1 1d       	adc	r27, r1
+  ca:	89 83       	std	Y+1, r24	; 0x01
+  cc:	9a 83       	std	Y+2, r25	; 0x02
+  ce:	ab 83       	std	Y+3, r26	; 0x03
+  d0:	bc 83       	std	Y+4, r27	; 0x04
+  d2:	eb cf       	rjmp	.-42     	; 0xaa <esperar+0x14>
+  d4:	0f 90       	pop	r0
+  d6:	0f 90       	pop	r0
+  d8:	0f 90       	pop	r0
+  da:	0f 90       	pop	r0
+  dc:	df 91       	pop	r29
+  de:	cf 91       	pop	r28
+  e0:	08 95       	ret
+
+000000e2 <led_init>:
+  e2:	e0 91 04 01 	lds	r30, 0x0104	; 0x800104 <PUERTO_B>
+  e6:	f0 91 05 01 	lds	r31, 0x0105	; 0x800105 <PUERTO_B+0x1>
+  ea:	80 81       	ld	r24, Z
+  ec:	8f 7d       	andi	r24, 0xDF	; 223
+  ee:	80 83       	st	Z, r24
+  f0:	e0 91 02 01 	lds	r30, 0x0102	; 0x800102 <DDR_B>
+  f4:	f0 91 03 01 	lds	r31, 0x0103	; 0x800103 <DDR_B+0x1>
+  f8:	80 81       	ld	r24, Z
+  fa:	80 62       	ori	r24, 0x20	; 32
+  fc:	80 83       	st	Z, r24
+  fe:	08 95       	ret
+
+00000100 <led_toggle>:
+ 100:	e0 91 04 01 	lds	r30, 0x0104	; 0x800104 <PUERTO_B>
+ 104:	f0 91 05 01 	lds	r31, 0x0105	; 0x800105 <PUERTO_B+0x1>
+ 108:	90 81       	ld	r25, Z
+ 10a:	80 e2       	ldi	r24, 0x20	; 32
+ 10c:	89 27       	eor	r24, r25
+ 10e:	80 83       	st	Z, r24
+ 110:	08 95       	ret
+
+00000112 <led_on>:
+ 112:	0c 94 80 00 	jmp	0x100	; 0x100 <led_toggle>
+
+00000116 <led_off>:
+ 116:	0c 94 80 00 	jmp	0x100	; 0x100 <led_toggle>
+
+0000011a <main>:
+ 11a:	0e 94 71 00 	call	0xe2	; 0xe2 <led_init>
+ 11e:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
+ 122:	0e 94 89 00 	call	0x112	; 0x112 <led_on>
+ 126:	0e 94 4b 00 	call	0x96	; 0x96 <esperar>
+ 12a:	0e 94 8b 00 	call	0x116	; 0x116 <led_off>
+ 12e:	f7 cf       	rjmp	.-18     	; 0x11e <main+0x4>
+
+00000130 <_exit>:
+ 130:	f8 94       	cli
+
+00000132 <__stop_program>:
+
+
+
+9- Ejercicio knight_rider: Conecte 5 leds a 5 pines controlados por el puerto B
+   Desarrollar un programa que genere el efecto del knight_rider:
+   https://wallpapercave.com/wp/wp3292242.gif
+   ayuda de programación: tal vez, se podría definir un arreglo de elementos 
+   unsigned char. Y cada elemento del arreglo puede contener un valor 
+   completo de la animacion, para el registro data del puerto b. 
+   De esta manera puede ir escribiendo, iterando, cada elemento del arreglo, 
+   al registro data del puerto b (con una pausa entre escritura y escritura).
+
