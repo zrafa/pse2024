@@ -1,43 +1,28 @@
 #include "utils.h"
-
-#define LED_0 0x1
-#define LED_1 0x2
-#define LED_2 0x4
-#define LED_3 0x8
-#define LED_4 0x10
-
 int main(void) {
+
     knight_rider_init();
+    unsigned char number_of_frames = 8;
+    unsigned char frames[number_of_frames];
+    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
+
+    frames[0] = 0x0;
+    frames[1] = 0x1;
+    frames[2] = 0x3;
+    for (int i = 3; i < number_of_frames - 1; ++i) {
+        frames[i] = frames[i - 1] << 1;
+    }
+    frames[number_of_frames - 1] = 0x0;
 
     while (1) {
-        led_on(LED_0);
-		esperar();
-		led_off(LED_0);
-        led_on(LED_1);
-		esperar();
-		led_off(LED_1);
-        led_on(LED_2);
-		esperar();
-		led_off(LED_2);
-        led_on(LED_3);
-		esperar();
-		led_off(LED_3);
-        led_on(LED_4);
-		esperar();
-		led_off(LED_4);
-        led_on(LED_3);
-		esperar();
-		led_off(LED_3);
-		led_on(LED_2);
-		esperar();
-		led_off(LED_2);
-		led_on(LED_1);
-		esperar();
-		led_off(LED_1);
-		led_on(LED_0);
-		esperar();
-		led_off(LED_0);
-
+        for (int i = 0; i < number_of_frames; ++i) {
+            *PUERTO_B = frames[i];
+            esperar();
+        }
+        for (int i = number_of_frames - 1; i >= 0; --i) {
+            *PUERTO_B = frames[i];
+            esperar();
+        }
     }
 }
 

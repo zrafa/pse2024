@@ -11,10 +11,7 @@
 
 
 void esperar();
-void led_init();
 void knight_rider_init();
-void led_on(char led);
-void led_off(char led);
 
 
 #endif	/* _UTILS_H */

@@ -18,10 +18,6 @@ volatile unsigned char * puerto_b = (unsigned char *) 0x25;
 /* direccion de DDR B (registro de control) */
 volatile unsigned char * ddr_b = (unsigned char *) 0x24;
 
-/* direccion PIN B (registro de datos de entrada) */
-volatile unsigned char * pin_b = (unsigned char *) 0x23;
-
-
 void esperar() {
 	volatile unsigned long i;
 	/* delay de aprox. 1 segundo */
@@ -30,20 +26,16 @@ void esperar() {
 
 /* led_init: configura el puerto b bit 5 como salida */
 void led_init() {
-    volatile unsigned char *DDR_B = (unsigned char *) 0x24;
-    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
-    *(PUERTO_B) &= LED;
-    *(DDR_B) |= LED;
+    *(puerto_b) &= LED;
+    *(ddr_b) |= LED;
 }
 
 /* led_on: enciende el led conectado al puerto b bit 5 */
 void led_on() {
-    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
-    *(PUERTO_B) |= LED;
+    *(puerto_b) |= LED;
 }
 
 /* led_off: apaga el led conectado al puerto b bit 5 */
 void led_off() {
-    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
-    *(PUERTO_B) &= ~LED;
+    *(puerto_b) &= ~LED;
 }
