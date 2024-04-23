@@ -1,0 +1,87 @@
+1)
+	- int: Se utiliza para almacenar valores numéricos enteros.
+		Ej: int i = 5;
+	- long: Se utiliza para almacenar valores numéricos enteros largos.
+		Ej: long l = 123456789;
+	- float: Se utiliza para almacenar valores numéricos de coma flotante.
+		Ej: float f = 3.14;
+	- double: Se utiliza para almacenar valores numéricos de coma flotante con doble precisión.
+		Ej double d = 3.141592;
+	- char: Se utiliza para almacenar elementos en un byte, comúnmente utilizado para almacenar caracteres alfanuméricos.
+		Ej: char c = "S";
+
+2) "word" hace referencia a la unidad de datos más grande que la arquitectura puede manejar en una sola operación. La longitud de una "word" varía dependiendo de la arquitectura del procesador.
+Por ej. en una arquitectura de 32 bits, una "word" generalmente se refiere a 32 bits (4 bytes), mientras que en una arquitectura de 64 bits una "word" se refiere comúnmente a 64 bits (8 bytes).
+
+3)  
++----------------+------------+
+‖ Arquitectura   ‖ Tamaño int ‖
++----------------+------------+
+‖ 8 bits         ‖ 16 bits    ‖
++----------------+------------+
+‖ 32 bits        ‖ 32 bits    ‖
++----------------+------------+
+‖ 64 bits        ‖ 32 bits    ‖
++----------------+------------+
+
+4) En el primer caso se imprime el valor numérico asociado al caracter "M" en la tabla ASCII.
+En el segundo caso se imprime el caracter "M".
+En la tabla ASCII el valor asociado al caracter "M" es 77.
+
+5) 
++-----------------+------------+
+‖ Declaración     ‖ Rango      ‖
++-----------------+------------+
+‖ char i;         ‖ [-128,127] ‖
++-----------------+------------+
+‖ unsigned char j;‖ [0,255]    ‖
++-----------------+------------+
+
+6) 
+char i = 'a'; // 01100001
+char j = 77; // 01001101
+char k = 0x4D; // 01001101
+unsigned char m = 'a'; // 01100001
+unsigned char n = 0x4d; // 01001101
+unsigned char p = 'A'; // 01000001
+
+Las variables "i" y "m" fueron inicializadas con el mismo valor, así como las variables "j", "k" y n fueron inicializadas con el mismo valor.
+
+7.1) 
+Valor final de ptr: 0xFFA0000C
+Valor final de a: 21
+Dirección de x[2]: 0xFFA0000C
+
+7.2) 
+Descripción del código:
+
+unsigned int array[5];	// Se declara un array de 5 enteros
+array[2] = 99;		// Se guarda el número 99 en la posición 2 del arreglo
+
+unsigned int *pointer;	// Se declara un puntero
+pointer = &array[0];	// Se guarda en el puntero la dirección donde esta almacenado el elemento 0 del arreglo
+*(pointer+2) = 99;	// Se guarda el valor 99 en la posición 2 del arreglo (sin cambios respecto al valor que ya tenia)
+
+pointer = array;	// Se guarda en el punteros la dirección donde esta almacenado el array (sin cambios respecto al valor que ya tenia)
+
+8.4) 
+11 = 0b00001011
+
+8.6) 
+unsigned char x = 0b00001011;
+unsigned char y;
+
+y = x & 0b11111000;
+
+8.7) 
+unsigned char x = 0b00001011;
+unsigned char y;
+
+y = x | 0b11000000;
+
+9)
+El resultado de multiplicar a la variable "var" (190) por 500 da como resultado 95000, pero como debe ser almacenado en una varible unsigned char, se truncara el resultado a los 8 bits menos significativos, dando como resultado 24, luego, al dividir ese resultado por 190 se obtiene 0.126, pero, ya que el tipo de varible solo almacena número enteros, el resultado final es 0 (cero).
+
+
+
+
