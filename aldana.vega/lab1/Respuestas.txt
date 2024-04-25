@@ -6,11 +6,11 @@
 3. Al ejecutar file led-test, el resultado es:
 led-test: ELF 32-bit LSB executable, Atmel AVR 8-bit, version 1 (SYSV), statically linked, with debug_info, not stripped
 
-4. El sistema instaló en usr/bin las binutils para avr.
+4. El sistema instaló en '/usr/bin' las binutils para avr.
 
-5.
+5. Los encabezados se instalaron en 'usr/lib/avr/include' y las bibliotecas en 'usr/lib/avr/lib'.
 
-6. EL compilador se instaló en /usr/lib/gcc.
+6. EL compilador se instaló en '/usr/bin'.
 
 7.a.
 led-test:     formato del fichero elf32-avr
@@ -163,6 +163,6 @@ Desensamblado de la sección .text:
     La sección de codigo ocupa 314 bytes y la de datos 6 bytes.
 
 
-8. El código del main() no es lo primero que se ejecuta.
+8. El código del main() no es lo primero que se ejecuta, antes de ejecutar el main se encuentran instrucciones de definicion de vectores de interrupción.
 La llamada a la función main se encuentra en la línea 0x8a.
 El código del main se encuentra en la línea 0x120.
