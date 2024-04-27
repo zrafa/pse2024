@@ -26,9 +26,9 @@ void melody_note(unsigned int frequency, unsigned int duration)
   long int duration_us = duration * 1000L;
 
   for (long i = 0; i <= duration_us; i += micros * 2) {
-    PORTB |= speaker_pin;
+    MELODY_PORT |= speaker_pin;
     delay_us(micros);
-    PORTB &= ~speaker_pin;
+    MELODY_PORT &= ~speaker_pin;
     delay_us(micros);
   }
 }
