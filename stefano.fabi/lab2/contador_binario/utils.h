@@ -11,7 +11,7 @@
 
 
 void esperar();
-void knight_rider_init();
-
+void init();
+void startSecuence();
 
 #endif	/* _UTILS_H */

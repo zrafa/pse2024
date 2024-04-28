@@ -1,0 +1,90 @@
+1.
+Tipos de datos básicos en C:
+* char: variable que almacena 1 byte, que podemos considerar caracter. Ej: char a = 'c';
+* int: variable que almacena números enteros sin decimales, en 4 bytes. Ej: int b = 150;
+* long int: igual que int. Ej: long int c = 152;
+* long long int: igual que int, pero con capacidad de 8 bytes. Ej: long long int d = 200;
+* short int: igual que int, pero con capacidad de 2 bytes. Ej: short int e = 102;
+* float: variable que almacena valores (decimales y exponenciales) en punto flotante, con capacidad de 4 bytes. Utiliza precisión simple.
+Ej: float f = 5E-6;
+* double: como float pero con capacidad de 8 bytes y con doble precisión. Ej: double g = 8.438951;
+
+2.
+En el contexto de arquitectura de una computadora, la palabra word se refiere a un grupo de bits de cantidad fija que el CPU puede procesar en un solo ciclo de instrucción. Por lo general, la longitud de cada "palabra" o word está definida por la arquitectura de la computadora. Por ejemplo, en una arquitectura de 32 bits, las words serán de 32 bits.
+
+3.
+En arquitecturas de 32 y 64 bits las variables int pueden almacenar 4 bytes, es decir, 32 bits. En arquitectura de 8 bits los int almacenan hasta 16 bits (2 bytes).
+
+4.
+En el primer printf se muestra el valor entero que representa a la variable a. Sabemos que se definió a = 'M'. Por lo tanto, si buscamos en 
+el código ASCII verificaremos que la letra M está representada por el número entero 77, que es justamente el valor que muestra el primer printf.
+El segundo printf nos imprime el valor de la variable a, pero como caracter. Es decir, muestra explícitamente 'M'.
+
+5.
+Una variable char, en este caso i, tiene un rango desde -128 hasta 127.
+Una variable unsigned char, en este caso j, tiene un rango desde 0 hasta 255.
+
+6.
+i -> 97d = 1100001b
+j -> 77d = 1001101b
+k -> 77d = 1001101b
+m -> 97d = 1100001b
+n -> 77d = 1001101b
+p -> 65d = 1000001b
+
+Las variables i, m y p podemos buscarlas en el Código ASCII y ver su representación en decimal, para luego pasar a binario.
+i = m = 97, y 97 = 64 + 32 + 1 = 1*2^6 + 1*2^5 + 0*2^4 + 0*2^3 + 0*2^2 + 0*2^1 + 1*2^0. Los coeficientes (1 y 0) que acompañan
+a las potencias de 2 definen la representación binaria. i = m = 1100001b.
+p = A = 65d = 64 + 1 = 1*2^6 + 0*2^5 + 0*2^4 + 0*2^3 + 0*2^2 + 0*2^1 + 1*2^0 = 1000001b.
+La variable j es un número decimal, solo queda escribirlo como número binario.
+j = 77 = 64 + 8 + 4 + 1 = 1*2^6 + 0*2^5 + 0*2^4 + 1*2^3 + 1*2^2 + 0*2^1 + 1*2^0 = 1001101b.
+k = n están escritos en hexadecimal. Cada cifra en hexa representa 4 bits en binario. 4h = 0100b y Dh = 1101.
+Luego k = n = 0x4D = 01001101b.
+
+7.
+7.1
+Al arrancar el programa la direccion inicial de x[0] es 0XFFA00004. ptr toma ese valor.
+Luego ptr se incrementa dos veces. Pasaría a tener el valor 0XFFA0000C.
+
+Al finalizar el codigo, la variable a tiene el valor 5.
+La direccion de x[2] es el valor del contenido de ptr al finalizar el código, pues ptr apunta a esta componente del array al
+haberse incrementado dos veces.
+7.2
+ unsigned int array[5]; //creo un array de enteros de 5 componentes
+ array[2] = 99;         //defino la componente 2 (tercera componente) del array con 99
+
+ unsigned int *pointer; //creo un puntero de tipo entero
+ pointer = &array[0];   //asigno al puntero la direccion de la primera componente de array (apunto a la primera componente)
+ *(pointer+2) = 99;     //asigno a la tercera componente del array (la direccion que corresponde a la direccion que apunta el puntero + 2) el valor 99
+
+ pointer = array;       //asigno la direccion del array a pointer
+
+8
+8.4
+unsigned char x = 11;
+
+La variable x está definida en decimal. En binario sería de la forma b7 b6 b5 b4 b3 b2 b1 b0.
+Los valores de cada bit son los siguientes = 0 0 0 0 1 0 1 1
+
+8.5
+if (x&0b00001000 == 00001000) printf ("el bit3 de la variable registro es 1 \n");
+
+8.6
+Supongo que utilizo una variable unsigned char que llamo var
+Para eliminar los bits b0, b1 y b2 uso la siguiente línea:
+   var = var & 0xF8;
+El 0xF8 es igual a 0b11111000. Al hacer AND entre var y este valor me quedo con los 3 bits más bajos.
+
+8.7
+Supongo que utilizo una variable unsigned char que llamo var
+Para poner en 1 los bits b7 y b6 utilizo la siguiente línea:
+   var = var | 0xC0;
+El 0xC0 = 0b11000000. Al hacer OR entre var y este valor pongo en 1 los bits b7 y b6.
+
+9.
+Como ambas variables (var y RES) están definidas como unsigned char, estas tienen capacidad para almacenar
+hasta 8 bits únicamente. Cuando se hace la operación var * 500, el resultado del producto es un número muy
+grande que contiene más que 8 bits para definirlo (1 0111 0011 0001 1000). Al agregar "unsigned char" previo
+al producto nos estamos quedando con los últimos 8 bits de este resultado (0001 1000 = 24 en decimal). Luego
+lo dividimos por 190. Como el resultado es menor que 1 y no se admiten decimales en unsigned char, el resultado
+final va a ser 0.

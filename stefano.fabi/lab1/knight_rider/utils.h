@@ -11,7 +11,9 @@
 
 
 void esperar();
-void knight_rider_init();
+void knight_init();
+void toRight();
+void toLeft();
 
 
 #endif	/* _UTILS_H */

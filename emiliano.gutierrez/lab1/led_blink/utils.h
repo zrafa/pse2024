@@ -9,9 +9,10 @@
 #ifndef _UTILS_H
 #define _UTILS_H
 
-
 void esperar();
-void knight_rider_init();
+void led_init();
+void led_on();
+void led_off();
 
 
 #endif	/* _UTILS_H */

@@ -1,9 +1,9 @@
 CC=avr-gcc
-OBJETOS=main.o utils.o
-APP=led-test
+OBJETOS=main.o serial.o usound.o utils.o
+APP=ultrasound
 CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p
 LDFLAGS=-mmcu=atmega328p
-FIRMWARE=imagen.hex
+FIRMWARE=image.hex
 
 # $@:Se sustituye por el nombre del objetivo de la presente regla.
 # $*:Se sustituye por la raíz de un nombre de fichero.
@@ -22,5 +22,6 @@ $(APP): $(OBJETOS)
 flash:
 	avr-objcopy -O ihex -R .eeprom $(APP) $(FIRMWARE)
 	avrdude -p atmega328p -c arduino -P /dev/ttyUSB0 -b 57600 -D -U flash:w:$(FIRMWARE):i
+
 clean:
-	rm $(OBJETOS) $(APP) $(FIRMWARE)
+	rm $(APP) $(FIRMWARE) main.o usound.o utils.o
