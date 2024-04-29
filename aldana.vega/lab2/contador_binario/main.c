@@ -1,11 +1,4 @@
 
-/* Enciende y apaga un led conectado al puerto B bit 5 de un atmega328 */
-
-/* 
- * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
- */
-
 #include "utils.h"
 
 inline void delay_us(volatile int us);
@@ -17,7 +10,7 @@ void main(void)
 	char estado_anterior = 1;
 	char estado = 1;
 
-	led_init();
+	init();
 	pulsador_on();
     while (1) {
 		estado_actual = leer_pin();
@@ -33,8 +26,7 @@ void main(void)
 		if(estado==1){
 			led_on(contador);
 			contador++;
-			delay_ms(300);//delay de 300ms
-			//esperar();
+			delay_ms(300);
 		}
     }
 }
@@ -44,6 +36,8 @@ inline void delay_us(volatile int us){
 	while(us--){
          asm volatile (
             "nop" "\n\t"
+			"nop" "\n\t"
+			"nop" "\n\t"
 			);
     }    
 }

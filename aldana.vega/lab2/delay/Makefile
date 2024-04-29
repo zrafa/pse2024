@@ -1,7 +1,6 @@
-
 CC=avr-gcc
-OBJETOS=main.o serial.o utils.o
-APP=ultrasound
+OBJETOS=main.o utils.o
+APP=led-test
 CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
 LDFLAGS=-mmcu=atmega328p
 FIRMWARE=imagen.hex
@@ -23,6 +22,5 @@ $(APP): $(OBJETOS)
 flash:
 	avr-objcopy -O ihex -R .eeprom $(APP) $(FIRMWARE)
 	avrdude -p atmega328p -c arduino -P /dev/ttyUSB0 -b 57600 -D -U flash:w:$(FIRMWARE):i
-	
 clean:
-	rm main.o utils.o $(APP) $(FIRMWARE)
+	rm $(OBJETOS) $(APP) $(FIRMWARE)

@@ -1,74 +1,59 @@
 
 /* Enciende y apaga un led conectado al puerto B bit 5 de un atmega328 */
 
-/* 
- * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
- */
-
 #include "utils.h"
+#include "math.h"
 #include "frecuencias.h"
 
 
-
-inline void esperar_1us(void);
-inline void esperar_10us(void);
 inline void delay_us(volatile int us);
-inline void tone(int frecuencia, int duracion);
+inline void tone(int frecuencia,long int duracion);
 inline void delay_ms(volatile int ms);
-inline void tono(int frecuencia);
 
-int melody[] = {
-   NOTE_A4, 0, NOTE_A4, 0, NOTE_A4, 0, NOTE_F4, NOTE_C5, NOTE_A4, 0, NOTE_F4, NOTE_C5, NOTE_A4, 0, NOTE_E5, 0, NOTE_E5, 0, NOTE_E5, 0, NOTE_F5, NOTE_C5, NOTE_GS4, NOTE_F4, NOTE_C5, NOTE_A4, 0};
-   
-int duracion_notas[] = {
-500, 500, 500, 500, 500, 500, 350, 150, 500, 500, 350, 150, 650, 500,
-  500, 500, 500, 500, 500, 350, 150, 500, 500, 350, 150, 650, 500
-};
+int melody[] = ALL_TOO_WELL;
+
+int tempo = 100;
 
 
-
-
-int main(void)
-{	
+int main(void){	
+	
 	init();
-	int tam = sizeof(melody);
+	int notes = sizeof(melody) / sizeof(melody[0]) / 2;
+	
     while (1) {
-		/*for (int i = 0; i <tam; i++)
-		{
-			int duracion = 1000/duracion_notas[i];//ms
-			tone(melody[i],duracion);
-			delay_ms(duracion);	
-		}*/
-		tono(2093);
-		delay_ms(100);
+  		long int duracion = 0;
+  		unsigned int wholenote = (60000 * 4) / tempo;
 
+  		for (int i = 0; i < notes * 2; i = i + 2) {
+   			if (melody[i+1] > 0) {
+      			duracion = wholenote / melody[i+1];
+    		} else  {
+     			duracion = wholenote / abs(melody[i+1]);
+               duracion *= 1.5;
+    		}
 
-    }
-}
-
-
-inline void tone(int frecuencia, int duracion){//duracion en ms
-	unsigned int periodo = 1000000/frecuencia;//Obtiene cuantos us equivale la frecuencia
-	unsigned int ciclos = frecuencia*duracion/1000;
-
-	for(int i=0;i<ciclos;i++){
-		on();
-	    delay_us(periodo/2);
-		off();
-		delay_us(periodo/2);
+    		tone(melody[i], duracion);
+			delay_us(duracion);
+    	}
+		delay_ms(1000);
 	}
-
 }
 
-inline void tono(int frecuencia){//duracion en ms
-	int periodo = 1000000/frecuencia;//Obtiene cuantos us equivale la frecuencia 
-		on();
-	    delay_us(periodo/2);
-		off();
-		delay_us(periodo/2);
 
+inline void tone(int frecuencia,long int duracion){//duracion en ms
+	if (frecuencia <= 0) {
+    	delay_us(duracion);
+  	}else{
+		long double us = 1000000.0 / frecuencia;
+    	duracion *= 1000L;
 
+		for(unsigned long i=0;i<duracion;i+=us){
+			on();
+	    	delay_us(us/2);
+			off();
+			delay_us(us/2);
+		}
+  	}
 }
 
 
@@ -77,10 +62,10 @@ inline void delay_us(volatile int us){
 	while(us--){
          asm volatile (
             "nop" "\n\t"
+			"nop" "\n\t"
+			"nop" "\n\t"
 			);
     }
-
-    
 }
 
 
