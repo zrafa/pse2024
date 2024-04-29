@@ -1,9 +1,7 @@
 #include "utils.h"
 #include "math.h"
 
-int main(void) {
-
-	char led [9] = {0b00000000,
+char led [9] = {0b00000000,
 					0b00000001, 
 					0b00000011,
 					0b00000110,
@@ -12,6 +10,7 @@ int main(void) {
 					0b00010000,
 					0b00000000};
 
+int main(void) {
     knight_rider_init();
 
     while (1) {
@@ -21,13 +20,10 @@ int main(void) {
 		}
 		
 		for(int i=8;i>=0;i--){
-			
 			led_on(led[i]);
 			esperar();
 		}
-
-
-		}
+	}
 }
 
 

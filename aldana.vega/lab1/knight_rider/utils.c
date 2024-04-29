@@ -21,15 +21,12 @@ void esperar() {
 }
 
 void knight_rider_init() {
-    volatile unsigned char *DDR_B = (unsigned char *) 0x24;
-    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
-    *(PUERTO_B) &= 0;//Apaga los bits de los leds
-    *(DDR_B) |= 0b00011111;//Configura los pines conectados a los bits 0-5 como salida
+    *(puerto_b) &= 0;//Apaga los bits de los leds
+    *(ddr_b) |= 0b00011111;//Configura los pines conectados a los bits 0-5 como salida
 }
 
 /* led_on: enciende los leds conectado al puerto b*/
 void led_on(char led) {
-    volatile unsigned char *PUERTO_B = (unsigned char *) 0x25;
-    *(PUERTO_B) = led;
+    *(puerto_b) = led;
 }
 
