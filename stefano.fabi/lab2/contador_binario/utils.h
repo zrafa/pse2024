@@ -1,17 +1,15 @@
 
 /* utils.h - funciones de soporte al programa principal */
 
-/* 
- * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
- */
-
 #ifndef _UTILS_H
 #define _UTILS_H
 
-
-void esperar();
-void init();
-void startSecuence();
+void delay_us(long n);
+void delay_ms(long n);
+void init(void);
+void next_number(void);
+char pressed(void);
+char is_counter_enable(void);
+void toggle_counter(void);
 
 #endif	/* _UTILS_H */

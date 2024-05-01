@@ -1,13 +1,9 @@
 
 /* contador binario */
-
-/* 
- * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
- */
+// tutorial anti rebote del boton mecanico
+// https://www.geekfactory.mx/tutoriales-arduino/boton-o-pulsador-con-arduino/
 
 #include "utils.h"
-
 
 int main(void)
 {	
@@ -15,7 +11,20 @@ int main(void)
 
 	while (1) 
 	{
-		startSecuence();
+
+		if (pressed()) 
+		{
+			delay_ms(100);
+
+			if (pressed()) 
+				toggle_counter();
+		}
+		
+		if (is_counter_enable()) 
+		{
+			next_number();
+			delay_ms(300);
+		}
     }
 }
 
