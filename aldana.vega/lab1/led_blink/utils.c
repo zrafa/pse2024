@@ -2,13 +2,7 @@
 /* utils.c - funciones de soporte al programa principal */
 
 /* Enciende y apaga un led conectado al puerto B bit 5 de un atmega328p
- * El puerto B de un atmega328p tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
  */
-
-
-
-
 /* puertos de E/S */
 
 /* direccion de PORTB (registro de datos) */

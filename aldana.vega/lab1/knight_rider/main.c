@@ -1,40 +1,29 @@
 #include "utils.h"
-#define LED_0 0x0
-#define LED_1 0x2
-#define LED_2 0x4
-#define LED_3 0x8
-#define LED_4 0x10
+#include "math.h"
+
+char led [9] = {0b00000000,
+					0b00000001, 
+					0b00000011,
+					0b00000110,
+					0b00001100,
+					0b00011000,
+					0b00010000,
+					0b00000000};
 
 int main(void) {
-    knigh_rider_init();
+    knight_rider_init();
 
     while (1) {
-       led_on(LED_0);
-		esperar();
-		led_off(LED_0);
-        led_on(LED_1);
-		esperar();
-		led_off(LED_1);
-        led_on(LED_2);
-		esperar();
-		led_off(LED_2);
-        led_on(LED_3);
-		esperar();
-		led_off(LED_3);
-        led_on(LED_4);
-		esperar();
-		led_off(LED_4);
-		led_on(LED_3);
-		esperar();
-		led_off(LED_3);
-		led_on(LED_2);
-		esperar();
-		led_off(LED_2);
-		led_on(LED_1);
-		esperar();
-		led_off(LED_1);
-        
-    }
+		for(int i=0;i<9;i++){
+			led_on(led[i]);
+			esperar();
+		}
+		
+		for(int i=8;i>=0;i--){
+			led_on(led[i]);
+			esperar();
+		}
+	}
 }
 
 

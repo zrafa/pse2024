@@ -1,9 +1,7 @@
 
 /* utils.c - funciones de soporte al programa principal */
 
-void esperar() {
-  volatile unsigned long i;
-  /* delay de aprox. 1 segundo */
-  for (i = 0; i < 50000; i++)
-    ;
+unsigned char is_on(char bit, char word) {
+  unsigned char aux = word & (1 << bit);
+  return aux == (1 << bit);
 }

@@ -1,17 +1,9 @@
 
 /* utils.h - funciones de soporte al programa principal */
 
-/* 
- * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
- * pines 8-13 de arduino 
- */
-
 #ifndef _UTILS_H
 #define _UTILS_H
 
+unsigned char is_on(char bit, char word);
 
-void esperar();
-void knight_rider_init();
-
-
-#endif	/* _UTILS_H */
+#endif /* _UTILS_H */
