@@ -1,5 +1,5 @@
 CC=avr-gcc
-OBJETOS=melody.o serial.o
+OBJETOS=melody.o
 APP=melody
 CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
 LDFLAGS=-mmcu=atmega328p
