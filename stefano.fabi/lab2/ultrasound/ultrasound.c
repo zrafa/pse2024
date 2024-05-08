@@ -24,11 +24,18 @@ volatile unsigned char * PIN_C = (unsigned char *) 0x26;
  */
 inline void esperar_1us(void)
 {
+
   	    asm volatile (
 			"nop" "\n\t"
 			"nop" "\n\t"
 			"nop" "\n\t"
 			"nop" "\n\t"
+			//"nop" "\n\t"
+			//"nop" "\n\t"
+			//"nop" "\n\t"
+			//"nop" "\n\t"
+			//"nop" "\n\t"
+			//"nop" "\n\t"
 			);
 }
 
@@ -93,37 +100,39 @@ int main()
 
 		// esperamos que el dispositivo prenda el echo
 		while (! echo_enable()) {
-			serial_put_str("ECHO: ESPERANDO... \r\n");
+			// demora al menos 50ms el codigo
+			//serial_put_str("ECHO: ESPERANDO... \r\n");
 		};
-
+		
 		int time_echo_us = 0;
 		
 		// calcular cuanto tiempo esta en alto la señal
 		while (echo_enable()) {
-			serial_put_str("ECHO: RECIBIDO... \r\n");
+			// va demorar el codigo
+			//serial_put_str("ECHO: RECIBIDO... \r\n");
 
 			esperar_1us();
 			time_echo_us++;
 
-			if (time_echo_us >= 36) break;
+			// si se aproxima a 36ms no se detecto ningun objeto
+			if (time_echo_us >= 36000) break;
 		}
 
-		if (time_echo_us >= 36) {
+		if (time_echo_us >= 36000) {
 			serial_put_str("FUERA DE RANGO\r\n");
 		} else {
 			int distancia_cm = time_echo_us / 58;
 
 			serial_put_str("LA DISTANCIA ES ");
 			serial_put_int(distancia_cm, 4);	/* Mostrar distancia */
-			serial_put_str("\r\n");
+			serial_put_str("cm \r\n");
 		}
 
-		// espero 10us para activar el proximo pulso
-		for (int i=0; i<10; i++) esperar_1us();
+		// espero 10ms para activar el proximo pulso
+		for (int i=0; i<10000; i++) esperar_1us();
 
 		// fin del programa
-		serial_put_str("FIN DEL PROGRAMA... \r\n");
-		for (int i=0; i<5000; i++) esperar_1us();
+		serial_put_str("FIN DEL PROGRAMA... \r\n\n");
     }
 }
 
