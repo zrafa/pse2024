@@ -4,7 +4,8 @@
 inline void delay_us(volatile int us);
 inline void delay_ms(volatile int ms);
 
-int main(void){	
+int main(void)
+{	
     int tiempo;
     int cm;
 
@@ -19,19 +20,17 @@ int main(void){
 
         //Echo lee la señal
         tiempo = 0;
-        echo_on();
-        while (leer_echo()==0){}
-        while(leer_echo()!=0 && tiempo<36000){//Espera a que el pin cambie de estado
+        while (leer_echo() == 0){}
+        while((leer_echo() != 0) && (tiempo < 36000)){//Espera a que el pin cambie de estado
             delay_us(5);
-            tiempo+=5;
+            tiempo += 5;
         }
-        echo_off();
         
         //Calculo de la distancia
-        if(tiempo>=36000){
+        if(tiempo >= 36000){
             serial_put_str("Fuera de rango\r\n");
         }else{
-            cm = tiempo/58;
+            cm = tiempo / 58;
             serial_put_str("Distancia:\r\n");
   	        serial_put_int(cm, 4);
             serial_put_str("\r\n");
@@ -42,7 +41,8 @@ int main(void){
 }
 
 
-inline void delay_us(volatile int us){
+inline void delay_us(volatile int us)
+{
    //PARA 16MHZ  
 	while(us--){
          asm volatile (
@@ -53,7 +53,8 @@ inline void delay_us(volatile int us){
     }  
 }
 
-inline void delay_ms(volatile int ms){
+inline void delay_ms(volatile int ms)
+{
    //PARA 16MHZ 
 	while(ms--){
          delay_us(100);

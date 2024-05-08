@@ -21,15 +21,14 @@ int main(void)
 {	
     while (1) {
 		led_on(LED_0);
-        //esperar_1us();
 		delay_us(500);
 		led_off(LED_0);
-		//esperar_1us();
 		delay_us(500);
     }
 }
 
-inline void delay_us(volatile int us){
+inline void delay_us(volatile int us)
+{
    //PARA 16MHZ 
 	while(us--){
          asm volatile (
@@ -42,7 +41,6 @@ inline void delay_us(volatile int us){
 
 inline void esperar_10us(void)
 {// Para 4MHZ
-
   	    asm volatile (
             "nop" "\n\t"
 			"nop" "\n\t"
@@ -60,7 +58,6 @@ inline void esperar_10us(void)
 
 inline void esperar_1us(void)
 {//PARA 16MHZ
-
   	    asm volatile (
             "nop" "\n\t"
 			"nop" "\n\t"

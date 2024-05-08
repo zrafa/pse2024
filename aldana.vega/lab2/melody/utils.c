@@ -11,26 +11,26 @@ volatile unsigned char * puerto_b = (unsigned char *) 0x25;
 
 /* direccion de DDR B (registro de control) */
 volatile unsigned char * ddr_b = (unsigned char *) 0x24;
-
-/* direccion PIN B (registro de datos de entrada) */
-volatile unsigned char * pin_b = (unsigned char *) 0x23;
-
  
-void esperar() {
+void esperar() 
+{
 	volatile unsigned long i;
 	/* delay de aprox. 1 segundo */
 	for (i=0; i<450000; i++);
 }
 
-void init() {
+void init() 
+{
     *(puerto_b) &= PIN;
     *(ddr_b) |= PIN;
 }
 
-void on() {
+void on() 
+{
     *(puerto_b) |= PIN;
 }
 
-void off() {
+void off() 
+{
     *(puerto_b) &= ~PIN;
 }

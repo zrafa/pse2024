@@ -20,12 +20,14 @@ volatile unsigned char * ddr_c = (unsigned char *) 0x27;
 volatile unsigned char * pin_c = (unsigned char *) 0x26;
 
 
-void esperar() {
+void esperar() 
+{
 	volatile unsigned long i;
 	for (i=0; i<100000; i++);
 }
 
-void init() {
+void init() 
+{
     //Configuracion de leds, bits 0 a 4 del puerto B
     *(puerto_b) &= 0;
     *(ddr_b) |= 0b00011111;
@@ -36,18 +38,21 @@ void init() {
 }
 
 /* led_on: enciende los leds conectados en el puerto B */
-void led_on(char led) {
+void led_on(char led) 
+{
     *(puerto_b) = led;
 }
 
 /*Enciende el pulsador para leer la entrada*/
-void pulsador_on() {
+void pulsador_on() 
+{
     *(puerto_c) = 0b00000001;
 }
 
 //Lee el bit o del puerto C
-char leer_pin() {
+char leer_pin() 
+{
     char aux = *pin_c;
-   return (aux & 0x1);
+    return (aux & 0x1);
 }
 
