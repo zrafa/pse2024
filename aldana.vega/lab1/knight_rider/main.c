@@ -2,7 +2,7 @@
 #include "math.h"
 
 char led [9] = {0b00000000,
-				0b00000001, 
+				0b00000001,
 				0b00000011,
 				0b00000110,
 				0b00001100,
@@ -22,7 +22,7 @@ int main(void)
 			led_on(led[i]);
 			esperar();
 		}
-		
+
 		for(i=8; i>=0; i--){
 			led_on(led[i]);
 			esperar();

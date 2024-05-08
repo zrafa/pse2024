@@ -19,7 +19,7 @@ int main(void)
 	init();
 	int notes = sizeof(melody) / sizeof(melody[0]) / 2;
 	
-    while (1) {
+	while (1) {
   		long int duracion = 0;
   		unsigned int wholenote = (60000 * 4) / tempo;
 
@@ -28,7 +28,7 @@ int main(void)
       			duracion = wholenote / melody[i+1];
     		} else  {
      			duracion = wholenote / abs(melody[i+1]);
-               duracion *= 1.5;
+				duracion *= 1.5;
     		}
 
     		tone(melody[i], duracion);
@@ -42,14 +42,14 @@ int main(void)
 inline void tone(int frecuencia,long int duracion)
 {//duracion en ms	
 	long double us = 1000000.0 / frecuencia;
-    duracion *= 1000L;
+	duracion *= 1000L;
 	unsigned long i;
 	if (frecuencia <= 0) {
     	delay_us(duracion);
   	}else{
 		for(i=0; i<duracion; i+=us){
 			on();
-	    	delay_us(us/2);
+			delay_us(us/2);
 			off();
 			delay_us(us/2);
 		}
@@ -60,11 +60,11 @@ inline void delay_us(volatile int us)
 {
    //PARA 16MHZ 
 	while(us--){
-         asm volatile (
+        asm volatile (
             "nop" "\n\t"
 			"nop" "\n\t"
 			"nop" "\n\t"
-			);
+		);
     }
 }
 

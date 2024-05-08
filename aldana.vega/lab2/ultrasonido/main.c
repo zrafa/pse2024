@@ -9,7 +9,7 @@ int main(void)
     int tiempo;
     int cm;
 
-	init();
+    init();
     serial_init();
     
     while (1) {
@@ -32,7 +32,7 @@ int main(void)
         }else{
             cm = tiempo / 58;
             serial_put_str("Distancia:\r\n");
-  	        serial_put_int(cm, 4);
+            serial_put_int(cm, 4);
             serial_put_str("\r\n");
         }       
 

@@ -15,10 +15,9 @@ int main(void)
 	while (1) {
 		esperar();
 		led_on();
-
 		esperar();
 		led_off();
-    }
+	}
 }
 
 

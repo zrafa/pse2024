@@ -23,7 +23,7 @@ void main(void)
 			estado = 1 - estado;
 		
 		estado_anterior = estado_actual;
-
+		
 		if(estado == 1){
 			led_on(n);
 			n++;
@@ -36,11 +36,11 @@ inline void delay_us(volatile int us)
 {
    //PARA 16MHZ 
 	while(us--){
-         asm volatile (
-            "nop" "\n\t"
+        asm volatile (
+        	"nop" "\n\t"
 			"nop" "\n\t"
 			"nop" "\n\t"
-			);
+		);
     }    
 }
 
@@ -48,7 +48,7 @@ inline void delay_ms(volatile int ms)
 {
    //PARA 16MHZ 
 	while(ms--){
-         delay_us(1000);
+    	delay_us(1000);
     }  
 }
 

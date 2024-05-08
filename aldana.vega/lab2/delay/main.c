@@ -31,38 +31,36 @@ inline void delay_us(volatile int us)
 {
    //PARA 16MHZ 
 	while(us--){
-         asm volatile (
-            "nop" "\n\t"
-			);
+    	asm volatile (
+        	"nop" "\n\t"
+		);
     }
-
-    
 }
 
 inline void esperar_10us(void)
 {// Para 4MHZ
-  	    asm volatile (
-            "nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			);
+  	asm volatile (
+        "nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+	);
 }
 
 inline void esperar_1us(void)
 {//PARA 16MHZ
-  	    asm volatile (
-            "nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			"nop" "\n\t"
-			);
+  	asm volatile (
+        "nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+		"nop" "\n\t"
+	);
 }
 

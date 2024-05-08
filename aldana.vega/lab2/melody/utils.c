@@ -14,9 +14,9 @@ volatile unsigned char * ddr_b = (unsigned char *) 0x24;
  
 void esperar() 
 {
-	volatile unsigned long i;
-	/* delay de aprox. 1 segundo */
-	for (i=0; i<450000; i++);
+    volatile unsigned long i;
+    /* delay de aprox. 1 segundo */
+    for (i=0; i<450000; i++);
 }
 
 void init() 

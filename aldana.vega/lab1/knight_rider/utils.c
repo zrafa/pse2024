@@ -16,9 +16,9 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23;
 
 void esperar() 
 {
-	volatile unsigned long i;
-	/* delay de aprox. 1 segundo */
-	for (i=0; i<30000; i++);
+    volatile unsigned long i;
+    /* delay de aprox. 1 segundo */
+    for (i=0; i<30000; i++);
 }
 
 void knight_rider_init()
