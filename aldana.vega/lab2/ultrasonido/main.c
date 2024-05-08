@@ -14,9 +14,9 @@ int main(void)
     
     while (1) {
         //Pulso de 10us para la señal de trigger
-		trig_on();
-		delay_us(10);
-		trig_off(); 
+        trig_on();
+        delay_us(10);
+        trig_off(); 
 
         //Echo lee la señal
         tiempo = 0;
