@@ -107,3 +107,13 @@ char serial_get_char(void)
   // Devolver el valor que se encuentra en el registro de datos de E/S
   return serial_port->data_io;
 }
+
+void serial_put_str(char *str)
+{
+  char *c = str;
+
+  while (*c != '\0') {
+    serial_put_char(*c);
+    c++;
+  }
+}

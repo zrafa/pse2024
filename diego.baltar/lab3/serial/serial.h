@@ -14,6 +14,7 @@
 
 void serial_init(void);
 void serial_put_char(char c);
+void serial_put_str(char *s);
 char serial_get_char(void);
 
 

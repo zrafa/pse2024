@@ -17,13 +17,14 @@ int main(void)
   // Inicializar driver
   serial_init();
 
-  serial_put_char('s');
-  serial_put_char('t');
-  serial_put_char('a');
-  serial_put_char('r');
-  serial_put_char('t');
-  serial_put_char('\r');
-  serial_put_char('\n');
+  //serial_put_char('s');
+  //serial_put_char('t');
+  //serial_put_char('a');
+  //serial_put_char('r');
+  //serial_put_char('t');
+  //serial_put_char('\r');
+  //serial_put_char('\n');
+  serial_put_str("start\r\n");
 
   while (recv_char != 'q') {
     // Recibir dato
@@ -31,8 +32,9 @@ int main(void)
 
     // Hacer eco del dato con un salto de línea
     serial_put_char(recv_char);
-    serial_put_char('\r');
-    serial_put_char('\n');
+    //serial_put_char('\r');
+    //serial_put_char('\n');
+    serial_put_str("\r\n");
   }
 
   for (;;);
