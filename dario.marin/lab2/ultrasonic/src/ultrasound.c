@@ -2,8 +2,8 @@
 #include "utils.h"
 
 // MACROS
-#define TRIGGER_PIN 1
-#define ECHO_PIN 2
+#define TRIGGER_PIN 0
+#define ECHO_PIN 1
 #define TRIGGER_PULSE_WIDE_US 10
 #define TIME_OUT_US 36000
 
