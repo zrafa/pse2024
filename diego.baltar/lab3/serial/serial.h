@@ -15,7 +15,11 @@
 void serial_init(void);
 void serial_put_char(char c);
 void serial_put_str(char *s);
+void serial_put_int(int n, unsigned char digits);
+void serial_put_long_int(long int n, unsigned char digits);
+void serial_put_double(double d, char int_digits, char frac_digits);
 char serial_get_char(void);
+void serial_get_str(char *str, int len);
 
 
 #endif /* _SERIAL_H */

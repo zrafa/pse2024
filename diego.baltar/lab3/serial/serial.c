@@ -55,6 +55,12 @@
 #define READY_TO_READ  (1 << UCSR0A_RXC0)   /* Dato listo para leer */
 #define READY_TO_WRITE (1 << UCSR0A_UDRE0)  /* Búfer listo para escribir */
 
+#define MAX_INT_DIGITS  5
+#define MAX_LONG_DIGITS 10
+
+/* Mínimo entre dos números */
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+
 /* Estructura de datos del USART del atmega328, según sugerido en el apunte */
 typedef struct
 {
@@ -116,4 +122,32 @@ void serial_put_str(char *str)
     serial_put_char(*c);
     c++;
   }
+}
+
+void serial_get_str(char *str, int len)
+{
+  char c = 0;
+  char n = 0;
+
+  while (c != '\n' && c != '\r' && n < len) {
+    c = serial_get_char();
+    *(str+n) = c;
+    n++;
+  }
+}
+
+void serial_put_int(int n, unsigned char digits)
+{
+  /*char len = MIN(MAX_INT_DIGITS, digits);
+  char str[len + 2];*/
+}
+
+void serial_put_long_int(long int n, unsigned char digits)
+{
+
+}
+
+void serial_put_double(double d, char int_digits, char frac_digits)
+{
+
 }
