@@ -13,6 +13,7 @@
 
 void serial_init(void);
 void serial_put_char(char c);
+char serial_rcv_empty(void);
 char serial_get_char(void);
 void serial_put_str(char * str);
 void serial_put_int (int valor, int cant_digitos);

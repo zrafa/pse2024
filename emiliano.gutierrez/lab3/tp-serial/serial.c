@@ -52,9 +52,14 @@ void serial_put_char (char c)
     puerto_serial->data_es = c;    
 }
 
+char serial_rcv_empty (void)
+{
+    return !((puerto_serial->status_control_a) & RXC);
+}
+
 char serial_get_char(void)
 {
-    while ((!(puerto_serial->status_control_a) & RXC));       
+    while (serial_rcv_empty());       
     return puerto_serial->data_es;
 }
 
