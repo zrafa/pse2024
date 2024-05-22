@@ -21,7 +21,7 @@ int main(void)
   serial_init();
 
   while (1) {
-    adc_value = adc_read(PORTC0);
+    adc_value = adc_read(ADC0);
     serial_put_int(adc_value, 4);
     serial_put_str("\r\n");
 
