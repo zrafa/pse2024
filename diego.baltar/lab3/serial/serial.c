@@ -58,6 +58,9 @@
 #define MAX_INT_DIGITS  5
 #define MAX_LONG_DIGITS 10
 
+/* Máximo entre dos números */
+#define MAX(a,b) ((a) < (b) ? (b) : (a))
+
 /* Mínimo entre dos números */
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
@@ -138,8 +141,22 @@ void serial_get_str(char *str, int len)
 
 void serial_put_int(int n, unsigned char digits)
 {
-  /*char len = MIN(MAX_INT_DIGITS, digits);
-  char str[len + 2];*/
+  char len = MAX(MIN(MAX_INT_DIGITS, digits), 1);
+
+  switch (len) {
+    case 5:
+      serial_put_char(n/10000 % 10 + 48);
+    case 4:
+      serial_put_char(n/1000 % 10 + 48);
+    case 3:
+      serial_put_char(n/100 % 10 + 48);
+    case 2:
+      serial_put_char(n/10 % 10 + 48);
+    case 1:
+      serial_put_char(n % 10 + 48);
+    default:
+      break;
+  }
 }
 
 void serial_put_long_int(long int n, unsigned char digits)
