@@ -30,19 +30,7 @@
 #define ADC_PS_64   (1 << ADPS2) | (1 << ADPS1)
 #define ADC_PS_128  (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0)
 
-/* Input Channel Selections */
-#define ADC0        (0)
-#define ADC1        (1 << MUX0)
-#define ADC2        (1 << MUX1)
-#define ADC3        (1 << MUX1) | (1 << MUX0)
-#define ADC4        (1 << MUX2)
-#define ADC5        (1 << MUX2) | (1 << MUX0)
-#define ADC6        (1 << MUX2) | (1 << MUX1)
-#define ADC7        (1 << MUX2) | (1 << MUX1) | (1 << MUX0)
-#define ADC8        (1 << MUX3)
-#define ADCVBG      (1 << MUX3) | (1 << MUX2) | (1 << MUX1)
-#define ADCGND      (1 << MUX3) | (1 << MUX2) | (1 << MUX1) | (1 << MUX0)
-
+/* Control */
 #define ADC_ENABLE  (1 << ADEN)
 #define ADC_CONVERT (1 << ADSC)
 
@@ -63,7 +51,7 @@ static volatile adc_t *adc = (adc_t*)(0x78);
 
 void adc_init(void)
 {
-  // Seleccionar Aref = AVcc
+  // Seleccionar AVcc = Aref con capacitor externo
   adc->multiplexer = (1 << REFS0);
 
   // Habilitar ADC
@@ -73,7 +61,7 @@ void adc_init(void)
 
 uint16_t adc_read(uint8_t channel)
 {
-  // Seleccionar canal ADC
+  // Seleccionar canal ADC (sólos los bits 0:3)
   adc->multiplexer |= (channel & 0x0F);
 
   // Comenzar conversión
