@@ -1,8 +1,8 @@
 
-/* Genera una señal digital con frecuencia frecuency,
+/* Genera una señal digital de onda cuadrada con frecuencia frecuency,
  * y que dura ms milisegundos
  */
-void frecuency(int frecuency, int ms)
+void square_wave(int frecuency, int ms)
 {
 	/* COMPLETAR */
 }

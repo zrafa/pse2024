@@ -1,6 +1,6 @@
 
 CC=avr-gcc
-OBJETOS=ultrasound.o serial.o adc.o gpio.o main.o
+OBJETOS=ultrasound.o serial.o adc.o gpio.o pulse_generator.o main.o
 APP=app
 CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
 LDFLAGS=-mmcu=atmega328p
