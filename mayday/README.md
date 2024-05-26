@@ -9,6 +9,8 @@ AVR atmega328p:
   - adc
   - gpio
   - delay (biblioteca)
+  - ultrasound
+  - frecuency (generar una señal con una frecuencia determinada)
 
 Dos cualidades son requeridas:
 - correctitud: cada driver funciona apropiadamente para todos los casos
