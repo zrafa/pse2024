@@ -48,14 +48,14 @@ int gpio_pin(int pin, int op)
 }
 
 
-/* establece el pin como entrada */
-void gpio_input(int pin)
+/* establece el pin p (o puerto p) como entrada */
+void gpio_input(int p)
 {
 	/* COMPLETAR */
 }
 
-/* establece el pin como salida */
-void gpio_output(int pin)
+/* establece el pin p (o puerto p) como salida */
+void gpio_output(int p)
 {
 	/* COMPLETAR */
 }

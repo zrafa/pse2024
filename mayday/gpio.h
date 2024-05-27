@@ -15,8 +15,8 @@
 #define PORT_D	0x6
 
 int gpio_pin(int pin, int op);
-void gpio_input(int pin);
-void gpio_output(int pin);
+void gpio_input(int p);
+void gpio_output(int p);
 void gpio_read(int port);
 void gpio_write(int port, unsigned char n);
 
