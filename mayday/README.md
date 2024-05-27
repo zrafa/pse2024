@@ -10,7 +10,7 @@ AVR atmega328p:
   - gpio
   - delay (biblioteca)
   - ultrasound
-  - frecuency (generar una señal con una frecuencia determinada)
+  - pulse_generator (generar una señal periodica)
 
 Dos cualidades son requeridas:
 - correctitud: cada driver funciona apropiadamente para todos los casos
