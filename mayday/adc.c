@@ -2,8 +2,6 @@
  *
  * adc.c - Driver del ADC del atmega328p
  *
- * META : ocultar el hardware a la aplicacion 
- *
  **********************************************************************/
 
 #include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */
@@ -29,7 +27,7 @@ void adc_init()
         /* Establecer tambien el prescalar para lograr un valor acorde (divisor) */
 }
 
-int adc_get(char input)
+int adc_get(unsigned char input)
 {
         /* 1. Selects which analog input is connected to the ADC */
 
