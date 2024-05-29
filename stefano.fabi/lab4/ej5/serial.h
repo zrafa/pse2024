@@ -14,7 +14,8 @@
 void serial_init(void);
 void serial_put_char(char c);
 void serial_put_string(const char* str);
-void serial_put_int(int n);
+void serial_put_int(int n, unsigned char digits);
+void serial_put_long_int(long int n, unsigned char digits);
 char serial_get_char(void);
 
 

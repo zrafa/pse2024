@@ -9,7 +9,6 @@
  *
  **********************************************************************/
 
-#include <stdio.h>
 #include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */
 
 /* Completar la estructura de datos para que se superponga a los registros
@@ -85,6 +84,14 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 #define READY_TO_READ   UCSR0A_RXC0                 /* Dato listo para leer */
 #define READY_TO_WRITE  UCSR0A_UDRE0                /* Búfer listo para escribir */
 
+#define MAX_INT_DIGITS  5
+#define MAX_LONG_DIGITS 10
+
+/* Máximo entre dos números */
+#define MAX(a,b) ((a) < (b) ? (b) : (a))
+
+/* Mínimo entre dos números */
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 // PAGINA 149 ATMEGA328 -- RUTINA INICIALIZACION
 // PAGINA 159 ATMEGA328 -- REGISTROS DEL HARDWARE
@@ -171,13 +178,27 @@ void serial_put_string(const char* str) {
     }
 }
 
-void serial_put_int(int n) {
-    char str[12];                // Character array to store the resulting string
-    sprintf(str, "%d", n);       // Convert the integer to a string
+void serial_put_int(int n, unsigned char digits)
+{
+  char len = MAX(MIN(MAX_INT_DIGITS, digits), 1);
 
-    int i = 0;                   // Index for iterating through the string
-    while (str[i]) {
-        serial_put_char(str[i]);
-        i++;
-    }
+  switch (len) {
+    case 5:
+      serial_put_char(n/10000 % 10 + 48);
+    case 4:
+      serial_put_char(n/1000 % 10 + 48);
+    case 3:
+      serial_put_char(n/100 % 10 + 48);
+    case 2:
+      serial_put_char(n/10 % 10 + 48);
+    case 1:
+      serial_put_char(n % 10 + 48);
+    default:
+      break;
+  }
+}
+
+void serial_put_long_int(long int n, unsigned char digits)
+{
+
 }

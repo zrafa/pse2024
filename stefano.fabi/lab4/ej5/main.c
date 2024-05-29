@@ -18,8 +18,6 @@ int melody[] = PACMAN_MELODY;
 
 int main()
 {
-	int val;
-	
 	speaker_init();
 
 	serial_init();
@@ -27,14 +25,10 @@ int main()
 	adc_init();
 
 	while (1) {
-		/* obtener una conversión ADC desde el pin de entrada ADC 2 */
- 		//val = adc_read(2);
-
-		/* realizar alguna acción con val */
-		//serial_put_int(val);
-
 		speaker_play(melody, MELODY_NOTES(melody), TEMPO);
-    	delay_ms(4000);
+    	
+		// esperar para la proxima cancion
+		delay_ms(1000);
 	}
 
 	return 0;

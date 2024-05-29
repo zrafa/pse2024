@@ -8,6 +8,9 @@
  **********************************************************************/
 
 #include "speaker.h"
+#include "adc.h"
+#include "delay.h"
+#include "serial.h"
 
 /* puertos de E/S */
 
@@ -24,6 +27,8 @@ volatile unsigned char * PIN_B = (unsigned char *) 0x23;
 
 /** Valor absoluto */
 #define ABS(x) ((x) < 0 ? (-x) : (x))
+
+#define VALOR_MAX_POTENCIOMETRO 255
 
 void speaker_init()
 {
@@ -46,29 +51,41 @@ void speaker_note(unsigned int frequency, unsigned int duration)
   long int duration_us = duration * 1000L;
 
   for (long i = 0; i <= duration_us; i += micros * 2) {
-    *(PUERTO_B) |= SPEAKER;
+    *(PUERTO_B) |= SPEAKER;   // prender el speaker
     delay_us(micros);
-    *(PUERTO_B) &= ~ SPEAKER;
+    *(PUERTO_B) &= ~ SPEAKER; // apagar el speaker
     delay_us(micros);
   }
 }
 
 void speaker_play(int *melody, unsigned int notes, unsigned int tempo)
 {
+  int val = 0;
+  int scale = 0;
+
   int divider = 0;
   unsigned int duration = 0;
   unsigned int wholenote = (60000 * 4) / tempo;
 
   for (int n = 0; n < notes * 2; n = n + 2) {
     divider = melody[n + 1];
+
     if (divider > 0) {
       duration = wholenote / divider;
     } else if (divider < 0) {
       duration = wholenote / ABS(divider);
       duration *= 1.5;
     }
+    
+		/* obtener una conversión ADC desde el pin de entrada ADC 2 */
+    val = adc_read(2);
+    scale = (val * 9) / VALOR_MAX_POTENCIOMETRO;
+		int new_frequency =  (int) melody[n] * scale;
 
-    speaker_note(melody[n], duration);
-    //delay_ms(duration * 0.1);
+		serial_put_int(scale, 10);
+		/* realizar alguna acción con val */
+		serial_put_string("\r \n");
+		
+    speaker_note(new_frequency, duration);
   }
 }
