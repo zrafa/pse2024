@@ -11,7 +11,7 @@ void serial_init(void);
 void serial_put_char(char c);
 char serial_get_char(void);
 void serial_put_str(char *str);
-char *serial_get_str(void);
+char serial_get_str(char * buffer, int max_string_length);
 void serial_put_int (int v, int cant_digitos);
 void serial_put_long_int (long int v, int cant_digitos);
 void serial_put_double (double v, char digitos_enteros, char digitos_fraccionarios);
