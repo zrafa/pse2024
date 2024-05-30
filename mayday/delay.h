@@ -15,16 +15,99 @@ inline void delay_us(int n)
 			 );
 
 	#elif F_CPU == MODE_16MHZ
+		if(us<=40){
+    		while (us--) {
+    			asm volatile(
+        	  	  "nop"
+                  "\n\t"
+        	      "nop"
+        	      "\n\t"
+        	      "nop"
+        	      "\n\t"
+        	      "nop"
+        	      "\n\t"
+        	      "nop"
+        	      "\n\t"
+        	      "nop"
+        	      "\n\t"
+        	      "nop"
+        	      "\n\t");
+  		    }
+  			asm volatile(
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t"
+    		  "nop"
+    		  "\n\t");
+  		}else{
+    		while (us--) {
+    			asm volatile(
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        		  "nop"
+        		  "\n\t"
+        	      "nop"
+        		  "\n\t");
+  			}
+  		}
+	#endif
+}
+
+inline void delay_ms(int n)
+{
+	#if F_CPU == MODE_4MHZ
 
 		/* COMPLETAR */
   	    asm volatile ("nop" "\n\t"
 			  "nop" "\n\t"
 			 );
 
-	#endif
-}
+	#elif F_CPU == MODE_16MHZ
+		while (ms--) {
+    		volatile int us = 1000;
+    		while (us--) {
+     		asm volatile(
+          	  "nop"
+              "\n\t"
+              "nop"
+              "\n\t");
+    }
+  }	
 
-inline void delay_ms(int n)
-{
-	/* COMPLETAR */
+	#endif
 }
