@@ -13,8 +13,17 @@
 #define PORT_B	0x4
 #define PORT_C	0x5
 #define PORT_D	0x6
+#define A0 0x0E
+#define A1 0x0F
+#define A2 0x10
+#define A3 0x11
+#define A4 0x12
+#define A5 0x13
+#define A6 0x14
+#define A7 0x15
 
-int gpio_pin(int pin, int op);
+
+int gpio_pin(int p, int op);
 void gpio_input(int p);
 void gpio_output(int p);
 void gpio_read(int port);
