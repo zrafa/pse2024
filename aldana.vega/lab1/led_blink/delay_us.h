@@ -16,10 +16,38 @@ inline void delay_us(volatile int us) {
         "nop"
         "\n\t"
         "nop"
-        "\n\t"
-        "nop"
         "\n\t");
   }
+  asm volatile(
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+    "nop"
+    "\n\t"
+  );
   }else{
     while (us--) {
     asm volatile(
