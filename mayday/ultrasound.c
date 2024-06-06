@@ -17,7 +17,7 @@
 int ultrasound_get(int trig, int echo)
 {
     int cm;
-    int tiempo;
+    int tiempo; 
 
     gpio_input(echo);
     gpio_output(trig);

@@ -54,14 +54,12 @@ typedef struct
 
 adc_t *adc = (adc_t *)0x78;
 
-void
-adc_init ()
+void adc_init ()
 {
   adc->control_status_a = ENABLE | PRESCALER_128;
 }
 
-int
-adc_get (char channel, char ref)
+int adc_get (char channel, char ref)
 {
   int result;
 
