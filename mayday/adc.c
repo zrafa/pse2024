@@ -63,17 +63,16 @@ int adc_get (char channel, char ref)
 {
   int result;
 
-  switch (ref)
-    {
-    case REF_EXTERNAL:
-      adc->multiplexer_selection = EXTERNAL_REF;
-      break;
-    case REF_1_1V:
-      adc->multiplexer_selection = INTERNAL_1_1V;
-    default:
-      adc->multiplexer_selection = INTERNAL_VCC;
-      break;
-    }
+  switch (ref){
+  case REF_EXTERNAL:
+          adc->multiplexer_selection = EXTERNAL_REF;
+          break;
+  case REF_1_1V:
+          adc->multiplexer_selection = INTERNAL_1_1V;
+  default:
+          adc->multiplexer_selection = INTERNAL_VCC;
+          break;
+  }
 
   adc->multiplexer_selection |= (channel & CHANNEL_MASK);
   adc->control_status_a |= START_CONVERSION;
