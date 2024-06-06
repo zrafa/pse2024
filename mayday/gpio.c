@@ -55,15 +55,16 @@ volatile unsigned char *PORTD = (unsigned char *) 0x2B;
 
 int gpio_pin(int p, int op) 
 {
-        unsigned char reg = p < 8? 0 : p < 14? 1 : 2;
+        unsigned char reg;
         unsigned char value;
-    
+        
+        reg = p < 8? 0 : p < 14? 1 : 2;    
         switch(reg){
         case 0:
 	        if (op == 0)
 	                *PORTD &= ~(1 << p);
                 else if (op == 1)
-                        *PORTD |= (1<<p);
+                        *PORTD |= (1 << p);
                 else if (op == 2)
                         *PORTD ^= (1 << p);
                 else
@@ -90,6 +91,7 @@ int gpio_pin(int p, int op)
                         value = (*PINC >> (p - 14)) & 0x01;
                 break;
         }
+        
         return value;
 }
 
@@ -97,20 +99,21 @@ int gpio_pin(int p, int op)
 /* establece el pin p (o puerto p) como entrada */
 void gpio_input(int p)
 {
-	unsigned char reg = p < 8? 0 : p < 14? 1 : 2;
-    
+	unsigned char reg;
+	
+	reg = p < 8? 0 : p < 14? 1 : 2;    
         switch(reg){
         case 0:
-	        *PORTD &= ~(1<<p); 
-	        *DDRD &= ~(1<<p);
+	        *PORTD &= ~(1 << p); 
+	        *DDRD &= ~(1 << p);
                 break;
         case 1:
-	        *PORTB &= ~(1<<(p-8)); 
-	        *DDRB &= ~(1<<(p-8));
+	        *PORTB &= ~(1 << (p - 8)); 
+	        *DDRB &= ~(1 << (p - 8));
                 break;
         default:
-	        *PORTC &= ~(1<<(p-14)); 
-	        *DDRC &= ~(1<<(p-14));
+	        *PORTC &= ~(1 << (p - 14)); 
+	        *DDRC &= ~(1 << (p - 14));
                 break;
         }
 }
@@ -118,20 +121,21 @@ void gpio_input(int p)
 /* establece el pin p (o puerto p) como salida */
 void gpio_output(int p)
 {
-	unsigned char reg = p < 8? 0 : p < 14? 1 : 2;
+	unsigned char reg;
     
+        reg = p < 8? 0 : p < 14? 1 : 2;
         switch(reg){
         case 0:
-	        *PORTD &= ~(1<<p); 
-	        *DDRD |=  (1<<p); 
+	        *PORTD &= ~(1 << p); 
+	        *DDRD |=  (1 << p); 
                 break;
         case 1:
-	        *PORTB &= ~(1<<(p-8)); 
-	        *DDRB |=  (1<<(p-8)); 
+	        *PORTB &= ~(1 << (p - 8)); 
+	        *DDRB |=  (1 << (p - 8)); 
                 break;
         default:
-	        *PORTC &= ~(1<<(p-14)); 
-	        *DDRC &= ~(1<<(p-14));
+	        *PORTC &= ~(1 << (p - 14)); 
+	        *DDRC &= ~(1 << (p - 14));
                 break;
         }
 }

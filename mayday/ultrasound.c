@@ -16,10 +16,10 @@
 
 int ultrasound_get(int trig, int echo)
 {
-	int cm;
-    int tiempo;
+    int cm;
+    int tiempo; 
 
-	gpio_input(echo);
+    gpio_input(echo);
     gpio_output(trig);
 
     //Pulso de 10us para la señal de trigger

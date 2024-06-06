@@ -1,3 +1,4 @@
+
 /**********************************************************************
  *
  * serial.c - Driver del UART del atmega328p
@@ -71,17 +72,16 @@ typedef struct {
 /* Puntero a la estructura de los registros del periférico */
 uart_t *serial_port = (uart_t*)(0xc0);
 
-
 void serial_init(void)
 {
 	/* Configurar los registros High y Low con BAUD_PRESCALE */
 	serial_port->baud_rate_h = (unsigned char)(BAUD_PRESCALE >> 8);
 	serial_port->baud_rate_l = (unsigned char)(BAUD_PRESCALE);
+
 	/* Configurar un frame de 8bits, con un bit de paridad y bit de stop */
-
 	serial_port->status_control_c = CHAR_SIZE | STOP_BITS | PARITY_MODE;
-	/* Activar la recepcion y transmicion */
 
+	/* Activar la recepcion y transmicion */
 	serial_port->status_control_b = RX_E | TX_E;
 }
 
@@ -101,9 +101,7 @@ char serial_get_char(void)
 
 void serial_put_str(char *str)
 {
-	// Extraigo los caracteres de string y los voy enviando
-	while (*str != '\0')
-	{
+	while (*str != '\0') {
 		serial_put_char(*str);
 		str++;
 	}
@@ -112,17 +110,20 @@ void serial_put_str(char *str)
 char serial_get_str(char * buffer, int max_string_length)
 {
 	int i = 0;
-
 	char c;
-	do
-	{
+
+	/*
+	Cuidado, el siguiente es un mensaje valido:
+	'hola mundo \n \r que tal?'
+	*/
+	do {
 		c = serial_get_char();
 		buffer[i] = c;
 		i++;
 	} while (c != '\0' && i < (max_string_length - 1));
-	//'hola mundo \n \r que tal?' es un mensaje valido
 
-	buffer[i] = '\0'; // Añadimos el carácter nulo al final del string para marcar su terminación
+	/*Se añade el carácter nulo al final del string para marcar su terminación*/
+	buffer[i] = '\0'; 
 	return buffer;
 }
 

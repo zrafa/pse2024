@@ -5,18 +5,23 @@
  */
 void square_wave(int frecuency, int ms, int pin)
 {
-        unsigned int n_ciclos = (frecuency * ms)/1000; 
-        if (frecuency <= 100){
-                unsigned int pause = 500/frecuency; // medio periodo en mS.0
-                for (unsigned int i = 0; i<n_ciclos; i++){
+        unsigned int n_ciclos;
+        unsigned int pause;
+        unsigned int i;
+        
+        n_ciclos = (frecuency * ms)/1000; 
+        
+        if (frecuency <= 100) {
+                pause = 500 / frecuency; // medio periodo en mS.0
+                for (i = 0; i < n_ciclos; i++){
                         gpio_pin(pin, ON);
                         delay_ms(pause);
                         gpio_pin(pin, OFF);
                         delay_ms(pause);
                 }
         }else{
-                unsigned int pause = 500000/frecuency; // medio periodo en uS.0
-                for (unsigned int i = 0; i<n_ciclos; i++){
+                pause = 500000 / frecuency; // medio periodo en uS.0
+                for (i = 0; i < n_ciclos; i++) {
                         gpio_pin(pin, ON);
                         delay_us(pause);
                         gpio_pin(pin, OFF);
