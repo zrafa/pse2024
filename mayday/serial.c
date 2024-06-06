@@ -49,6 +49,10 @@
 #define READY_TO_READ (1 << UCSR0A_RXC0)   /* Dato listo para leer */
 #define READY_TO_WRITE (1 << UCSR0A_UDRE0) /* Búfer listo para escribir */
 
+#define MAX_INT_DIGITS 5
+#define MAX_LONG_DIGITS 10
+#define MAX_DOUBLE_PRECISION 10
+
 #ifndef F_CPU
 #define F_CPU 16000000UL
 #endif
@@ -122,19 +126,62 @@ char serial_get_str(char * buffer, int max_string_length)
 	return buffer;
 }
 
-void serial_put_int (int v, int cant_digitos)
+void serial_put_long_int (long int value, int num_digits)
 {
-	/* COMPLETAR */
+	char buffer[MAX_LONG_DIGITS] = {0};
+	int i = 0;
+
+	if (value == 0) {
+		return serial_put_char('0');
+	} else if (value < 0) {
+		serial_put_char('-');
+		value = -value; // Usar valor absoluto
+	}
+
+	while (value != 0) {
+		buffer[i] = value % 10;
+		value /= 10;
+		i++;
+	}
+
+	if (num_digits < 1 || num_digits > MAX_LONG_DIGITS)
+		num_digits = i;
+
+	for (int j = num_digits - 1; j > -1; j--)
+		serial_put_char(48 + buffer[j]);
 }
 
-void serial_put_long_int (long int v, int cant_digitos)
+void serial_put_int (int value, int num_digits)
 {
-	/* COMPLETAR */
+	if (num_digits > MAX_INT_DIGITS)
+		num_digits = MAX_INT_DIGITS;
+
+	return serial_put_long_int(value, num_digits);
 }
 
-void serial_put_double (double v, int digitos_enteros, int digitos_fraccionarios)
+void serial_put_double (double value, int int_digits, int frac_digits)
 {
-	/* COMPLETAR */
+	long int int_value = (long int) value;
+	double frac_value = value - int_value;
+	int frac_digit = 0;
+
+	serial_put_long_int(int_value, int_digits);
+	serial_put_char('.');
+
+	if (frac_digits > MAX_DOUBLE_PRECISION)
+		frac_digits = MAX_DOUBLE_PRECISION;
+	else if (frac_digits < 1)
+		frac_digits = 1;
+
+	if (frac_value < 0)
+		frac_value = -frac_value;
+
+	for (int i = 0; i < frac_digits; i++) {
+		frac_value *= 10;
+		frac_digit = (int) frac_value;
+		serial_put_char(48 + (char) frac_value);
+		frac_value -= frac_digit;
+	}
 }
 
 char serial_recibido(void)
