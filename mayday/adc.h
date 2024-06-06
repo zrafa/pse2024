@@ -9,6 +9,6 @@
 #define _ADC_H
 
 void adc_init(void);
-int adc_get(unsigned char);
+int adc_get (char channel, char ref);
 
 #endif /* _SERIAL_H */
