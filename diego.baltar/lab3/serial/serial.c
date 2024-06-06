@@ -178,7 +178,6 @@ void serial_put_int(int value, int num_digits)
 
 void serial_put_double(double value, int int_digits, int frac_digits)
 {
-  char buffer[MAX_LONG_DIGITS] = {0};
   long int int_value = (long int)value;
   double frac_value = value - int_value;
   int frac_digit = 0;
@@ -186,8 +185,8 @@ void serial_put_double(double value, int int_digits, int frac_digits)
   serial_put_long_int(int_value, int_digits);
   serial_put_char('.');
 
-  if (frac_digits > MAX_LONG_DIGITS) {
-    frac_digits = MAX_LONG_DIGITS;
+  if (frac_digits > MAX_DOUBLE_PRECISION) {
+    frac_digits = MAX_DOUBLE_PRECISION;
   } else if (frac_digits < 1) {
     frac_digits = 1;
   }
