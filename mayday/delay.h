@@ -18,41 +18,41 @@ inline void delay_us(int n)
 		if(us<=40){
     		while (us--) {
     			asm volatile(
-        	  	  "nop" "\n\t"
-        	      "nop" "\n\t"
-        	      "nop" "\n\t"
-        	      "nop" "\n\t"
-        	      "nop" "\n\t"
-        	      "nop" "\n\t"
-        	      "nop" "\n\t");
+					"nop" "\n\t"
+        	      	"nop" "\n\t"
+        	      	"nop" "\n\t"
+        	      	"nop" "\n\t"
+        	      	"nop" "\n\t"
+        	      	"nop" "\n\t"
+        	      	"nop" "\n\t");
   		    }
   			asm volatile(
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t"
-    		  "nop" "\n\t");
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t"
+				"nop" "\n\t");
   		}else{
     		while (us--) {
     			asm volatile(
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        		  "nop" "\n\t"
-        	      "nop" "\n\t");
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t"
+					"nop" "\n\t");
   			}
   		}
 	#endif
@@ -72,8 +72,8 @@ inline void delay_ms(int n)
     		volatile int us = 1000;
     		while (us--) {
      		asm volatile(
-          	  "nop" "\n\t"
-              "nop" "\n\t");
+				"nop" "\n\t"
+				"nop" "\n\t");
     }
   }	
 
