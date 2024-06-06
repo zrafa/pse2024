@@ -15,7 +15,7 @@ inline void delay_us(int n)
 			 );
 
 	#elif F_CPU == MODE_16MHZ
-		if(us<=40){
+		if (us <= 40) {
     		while (us--) {
     			asm volatile(
 					"nop" "\n\t"
@@ -41,7 +41,7 @@ inline void delay_us(int n)
 				"nop" "\n\t"
 				"nop" "\n\t"
 				"nop" "\n\t");
-  		}else{
+  		} else {
     		while (us--) {
     			asm volatile(
 					"nop" "\n\t"
@@ -74,8 +74,7 @@ inline void delay_ms(int n)
      		asm volatile(
 				"nop" "\n\t"
 				"nop" "\n\t");
-    }
-  }	
-
+    		}
+  		}	
 	#endif
 }

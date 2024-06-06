@@ -30,18 +30,18 @@ int ultrasound_get(int trig, int echo)
     //Echo lee la señal
     tiempo = 0;
     while (gpio(echo,GET) == 0);
-    while((gpio(echo,GET) != 0) && (tiempo < TIME_OUT_US)){//Espera a que el pin cambie de estado
+    while ((gpio(echo,GET) != 0) && (tiempo < TIME_OUT_US)) {//Espera a que el pin cambie de estado
         delay_us(TIME_BETWEEN_SCANS_US);
         tiempo += TIME_BETWEEN_SCANS_US;
     }
         
     //Calculo de la distancia
-    if(tiempo >= TIME_OUT_US){
+    if (tiempo >= TIME_OUT_US) {
         cm = -1;
-    }else{
+    } else {
         cm = tiempo / TIME_DISTANCE_RELATION;
     }   
 
-	return cm;
+    return cm;
 }
 
