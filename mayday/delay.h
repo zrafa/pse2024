@@ -9,10 +9,13 @@ inline void delay_us(int n)
 
 	#if F_CPU == MODE_4MHZ
 
-		/* COMPLETAR */
-  	    asm volatile ("nop" "\n\t"
-			  "nop" "\n\t"
-			 );
+        /* 
+        Para esperas de hasta 10us aproximadamente hay bastante error. 
+        De ahi para arriba se vuelve mas preciso con menos error.
+        */
+		for (int i = 0; i < n; i++) {
+  	        asm volatile ("nop" "\n\t");
+        }
 
 	#elif F_CPU == MODE_16MHZ
 		if(us<=40){
@@ -92,10 +95,9 @@ inline void delay_ms(int n)
 {
 	#if F_CPU == MODE_4MHZ
 
-		/* COMPLETAR */
-  	    asm volatile ("nop" "\n\t"
-			  "nop" "\n\t"
-			 );
+	for (int i = 0; i < n; i++) {
+        delay_us(1000);
+     }
 
 	#elif F_CPU == MODE_16MHZ
 		while (ms--) {

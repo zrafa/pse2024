@@ -137,14 +137,50 @@ void gpio_output(int p)
 }
 
 /* leer los 8 bits del puerto port */
-void gpio_read(int port)
+unsigned char gpio_read(int PORT)
 {
-	/* COMPLETAR */
+    volatile unsigned char * DIR_PIN;
+    
+    switch (PORT) {
+        case PORT_B: 
+            DIR_PIN = (unsigned char *) 0x23; //DIR_PINB
+            break;
+        
+        case PORT_C: 
+            DIR_PIN = (unsigned char *) 0x26; //DIR_PINC
+            break;
+        
+        case PORT_D: 
+            DIR_PIN = (unsigned char *) 0x29; //DIR_PIND
+            break;
+            
+        default: return;
+    }
+
+	return * (DIR_PIN)
 }
 
 /* escribir los 8 bits del puerto port con el valor n */
-void gpio_write(int port, unsigned char n)
+inline void gpio_write (int PORT,unsigned char n)
 {
-	/* COMPLETAR */
+    volatile unsigned char * DIR_PORT;
+    
+    switch (PORT) {
+        case PORT_B: 
+            DIR_PORT = (unsigned char *) 0x25; //DIR_PORTB
+            break;
+        
+        case PORT_C: 
+            DIR_PORT = (unsigned char *) 0x28; //DIR_PORTC
+            break;
+        
+        case PORT_D: 
+            DIR_PORT = (unsigned char *) 0x2B; //DIR_PORTD
+            break;
+            
+        default: return;
+    }
+    
+    *(DIR_PORT) = n;
 }
 
