@@ -4,6 +4,7 @@
  * o en forma paralela (con los 8 bits del puerto).
  */
 
+#include "gpio.h"
 
 /*
  * Ejemplos de uso:
@@ -158,10 +159,11 @@ unsigned char gpio_read(int PORT)
             DIR_PIN = (unsigned char *) 0x29; //DIR_PIND
             break;
             
-        default: return;
+        default:
+            break;
     }
 
-	return * (DIR_PIN)
+	return * (DIR_PIN);
 }
 
 /* escribir los 8 bits del puerto port con el valor n */
@@ -182,7 +184,8 @@ inline void gpio_write (int PORT,unsigned char n)
             DIR_PORT = (unsigned char *) 0x2B; //DIR_PORTD
             break;
             
-        default: return;
+        default: 
+            break;
     }
     
     *(DIR_PORT) = n;
