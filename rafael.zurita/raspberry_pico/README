@@ -1,0 +1,16 @@
+
+Blink para raspberry py pico
+
+Hay que instalar el toolchain para arm.
+
+    sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
+
+Instalar cargo y rustc
+
+    cargo install uf2-util
+
+Flashing
+    
+    mantener el pulsador presionado y conectar la placa al puerto USB
+    copiar el firmware uf2 al disco fat
+
