@@ -1,0 +1,4 @@
+CompileFlags:
+  Add: []
+  Remove: ["-Os", "-DF_CPU=16000000UL", "-mmcu=atmega328p", "-I/usr/avr/include/", "-I/usr/lib/avr/include/", "-I../../../mayday/"]
+  Compiler: gcc
