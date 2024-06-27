@@ -37,14 +37,7 @@ volatile unsigned char * ddr_c = (unsigned char *) 0x27;
 /* direccion PIN C (registro de datos de entrada) */
 volatile unsigned char * pin_c = (unsigned char *) 0x26;
 
-char led [9] = {0b00000000,
-				0b00000001, 
-				0b00000011,
-				0b00000110,
-				0b00001100,
-				0b00011000,
-				0b00010000,
-				0b00000000};
+char led [9] = {0b00000000, 0b00000001, 0b00000011, 0b00000110, 0b00001100, 0b00011000, 0b00010000, 0b00000000};
 
 void inicializar()
 {
@@ -62,12 +55,12 @@ void knight_rider_init()
 void knight_rider()
 {
     for (int i = 0; i < 9; i++) {
-		led_on(led[i]);
-		esperar();
+        led_on(led[i]);
+        esperar();
     }
 		
     for (int i = 8;i >= 0; i--) {
-	    led_on(led[i]);
+        led_on(led[i]);
     	esperar();
     }
 }
