@@ -27,10 +27,10 @@
 #define REFS1 7
 #define REFS0 6
 #define ADLAR 5
-#define MUX3 3
-#define MUX2 2
-#define MUX1 1
-#define MUX0 0
+#define A3 3
+#define A2 2
+#define A1 1
+#define A0 0
 
 // CONFIGS
 #define ENABLE (1 << ADEN)
@@ -41,6 +41,7 @@
 #define INTERNAL_1_1V (0b11 << REFS0)
 
 void adc_init(void);
-int adc_get (char channel, char ref);
+
+int adc_get(char channel, char ref);
 
 #endif /* _SERIAL_H */
