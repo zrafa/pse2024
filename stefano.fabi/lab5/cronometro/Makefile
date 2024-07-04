@@ -1,5 +1,5 @@
 CC=avr-gcc
-LIBS=adc.o serial.o
+LIBS=serial.o
 LIBDIR=../../../mayday
 LIBOBJS=$(patsubst %, $(LIBDIR)/%, $(LIBS))
 OBJETOS=main.o timer.o $(LIBOBJS)
