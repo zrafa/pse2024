@@ -11,7 +11,7 @@ int main(void)
 
     for (;;) {
         adc_value = adc_get(A0, REF_5V);
-        time_ms = (float) (1 + adc_value / MAX_KNOB);
+        time_ms =  (0.5f + 2 * ((float) adc_value) / MAX_KNOB);
         set_duty_cycle(time_ms);
     }
 }
