@@ -7,7 +7,7 @@
 #define T_PWM 20
 #define PRESCALER 8
 #define ICR1_VALUE ((F_OSC / (PRESCALER * F_CK)) - 1)
-
+#define START_DUTY_CYCLE (ICR1_VALUE / 2)
 // BITS
 #define WGM13 4
 #define WGM12 3
@@ -46,14 +46,19 @@ timer1_t *timer1 = (timer1_t *) 0x80;
 void timer_init() {
     timer1->tccr1a |= FAST_PWM_MODE_A | CLEAR_ON_MATCH;
     timer1->tccr1b |= FAST_PWM_MODE_B | PRESCALER_8;
-    timer1->icr1l = ICR1_VALUE & 0xFF;
+
     timer1->icr1h = (ICR1_VALUE >> 8) & 0xFF;
+    timer1->icr1l = ICR1_VALUE & 0xFF;
+
+    timer1->ocr1ah = (START_DUTY_CYCLE >> 8) & 0xFF;
+    timer1->ocr1al = START_DUTY_CYCLE & 0xFF;
+
 
     gpio_output(9);
 }
 
 void set_duty_cycle(float time_ms) {
     uint16_t ocr1a = (uint16_t)((time_ms / T_PWM) * (ICR1_VALUE + 1));
-    timer1->ocr1al = ocr1a & 0xFF;
     timer1->ocr1ah = (ocr1a >> 8) & 0xFF;
+    timer1->ocr1al = ocr1a & 0xFF;
 }
