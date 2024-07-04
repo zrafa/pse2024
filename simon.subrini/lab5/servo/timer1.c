@@ -45,10 +45,11 @@ void timer1_init ()
 }
 
 
-void timer1_set_pwm_duty_cycle(float duty_cycle_ms)
+void timer1_set_pwm_duty_cycle(float grados)
 {
-  float aux = (duty_cycle_ms * ICR1_VALUE)/(T_PWM*1000);
-  unsigned int ocr1a = (unsigned int) aux;
+  //float aux = (grados * ICR1_VALUE)/(T_PWM*1000);
+  float prop = (float)grados / 180.0;
+  unsigned int ocr1a = (102 - 51)*prop + 51;
   timer1->ocr1ah = (ocr1a >> 8);
   timer1->ocr1al = ocr1a & 0x00FF;
 }

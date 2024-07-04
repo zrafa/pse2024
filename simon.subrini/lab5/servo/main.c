@@ -15,7 +15,7 @@ void main()
 
   while (1) {
     adc_value = adc_get(A0, REF_5V);
-    time_ms = (float) (1 + adc_value / MAX_KNOB);
+    time_ms = (float) (51 + (adc_value / MAX_KNOB)*51);
     timer1_set_pwm_duty_cycle(time_ms);
     delay_ms(300);
   }
