@@ -15,13 +15,12 @@ void main(){
    serial_init();
    adc_init();
 
-
-  while (1)
-  {
-   adc = adc_get(A0,REF_5V);
-   valor = map(adc,0,1023,500,2500);
-   servo_angulo(valor);
-  }
+   while (1)
+   {
+      adc = adc_get(A0,REF_5V);
+      valor = map(adc,0,1023,500,2500);
+      servo_angulo(valor);
+   }
 }
 
 
