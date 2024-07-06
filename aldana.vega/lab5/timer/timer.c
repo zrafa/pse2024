@@ -45,9 +45,9 @@ volatile unsigned char *timer1_timsk1 = (unsigned char) (0x6F);
 void timer_init(void)
 { 
     //Setea modo CTC
-    timer1->tccr1b |= TIMER1_CTC;
+    timer1->tccr1b |= TIMER1_CTC; //bit 3
     //Setea el reloj
-    timer1->tccr1b |= TIMER1_CS;
+    timer1->tccr1b |= TIMER1_CS; //bits 0 y 1
     //valor con el cual comparar, compara con el registro ocr1a
     timer1->ocr1al = TIMER1_OCR1A;
     //Comparar con ocr1a y genera una interrupcion si hay match
