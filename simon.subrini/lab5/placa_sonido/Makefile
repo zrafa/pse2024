@@ -1,12 +1,10 @@
+
 CC=avr-gcc
-LIBS=serial.o
-LIBDIR=../../../mayday
-LIBOBJS=$(patsubst %, $(LIBDIR)/%, $(LIBS))
-OBJETOS=main.o timer.o $(LIBOBJS)
-APP=main
-CFLAGS=-Os -DF_CPU=4000000UL -mmcu=atmega328p -I$(LIBDIR)
+OBJETOS= timer1.o main.o gpio.o serial.o
+APP=Placa_De_Sonido
+CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
 LDFLAGS=-mmcu=atmega328p
-FIRMWARE=image.hex
+FIRMWARE=imagen.hex
 
 # $@:Se sustituye por el nombre del objetivo de la presente regla.
 # $*:Se sustituye por la raíz de un nombre de fichero.
@@ -17,7 +15,7 @@ all: $(APP)
 
 
 $(APP): $(OBJETOS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -25,6 +23,6 @@ $(APP): $(OBJETOS)
 flash:
 	avr-objcopy -O ihex -R .eeprom $(APP) $(FIRMWARE)
 	avrdude -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:$(FIRMWARE):i
-
+	
 clean:
-	rm -f $(APP) $(OBJETOS) $(FIRMWARE)
+	rm $(OBJETOS) $(APP) $(FIRMWARE)
