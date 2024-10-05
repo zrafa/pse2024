@@ -1,6 +1,7 @@
 
 #include <xinu.h>
 #include "globals.h"
+// #include "serial.h"
 
 #define DIAS 18
 #define IZQ 0
@@ -17,6 +18,7 @@
 int posicion;
 
 void mover_init(void) {
+	// serial_put_str("start\n\r");
 	while (encendido && (!motor_izq()));
 
 	posicion = IZQ;
@@ -25,6 +27,7 @@ void mover_init(void) {
 void esperar(int duracion) {
 	int n = 0;
 
+	// serial_put_str("esperar\n\r");
 	while (encendido && (n < duracion)) {
 		sleep(1);
 		n++;
@@ -35,11 +38,13 @@ void esperar(int duracion) {
 void mover(void) {
 	int fin;
 
+	// serial_put_str("mover\n\r");
 	if (posicion == IZQ) {
 		while (encendido) {
 			fin = motor_der();
 			if (fin) {
 				posicion = DER;
+				return;
 			}
 
 			sleepms(100);
@@ -49,6 +54,7 @@ void mover(void) {
 			fin = motor_izq();
 			if (fin) {
 				posicion = IZQ;
+				return;
 			}
 			sleepms(100);
 		}
@@ -60,28 +66,35 @@ void brazo(void) {
 
 	while (1) {
 
-		/*
 	   if (encendido) {
+		estado = START;
 		mover_init();
 		for (i=1; i<DIAS; i++) {
-			mover();
-			esperar(MEDIA_HORA);
-
-			mover();
-			esperar(MEDIA_HORA);
-
-			mover();
-			esperar(MEDIA_HORA);
-			
 			dia = i;
+
+			estado = MOVIENDO;
+			mover();
+			estado = ESPERANDO;
+			esperar(MEDIA_HORA);
+
+			estado = MOVIENDO;
+			mover();
+			estado = ESPERANDO;
+			esperar(MEDIA_HORA);
+
+			estado = MOVIENDO;
+			mover();
+			estado = ESPERANDO;
+			esperar(MEDIA_HORA);
 			
-			serial_put_str("esperamos dia\n\r");
+			estado = ESPERANDO_1_DIA;
+			// serial_put_str("esperamos dia\n\r");
 			esperar(UN_DIA);
 		}
+		estado = APAGADO;
 	   }
-	   */
 	   // serial_put_str("esperamos dia\n\r");
-	   //sleepms(100);
+	   sleep(2);
 	 }
 }
 

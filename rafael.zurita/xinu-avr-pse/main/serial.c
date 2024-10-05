@@ -92,8 +92,14 @@ void serial_put_char(char c)
 	serial_port->data_io = c;
 }
 
+char serial_get_char(void)
+{
+	while (!((serial_port->status_control_a) & (READY_TO_READ)))
+		;
+	return (serial_port->data_io);
+}
 
-void serial_put_str(const char *str)
+void serial_put_str(char *str)
 {
 	while (*str != '\0') {
 		serial_put_char(*str);
@@ -101,33 +107,86 @@ void serial_put_str(const char *str)
 	}
 }
 
+char serial_get_str(char * buffer, int max_string_length)
+{
+	int i = 0;
+	char c;
+
+	/*
+	Cuidado, el siguiente es un mensaje valido:
+	'hola mundo \n \r que tal?'
+	*/
+	do {
+		c = serial_get_char();
+		buffer[i] = c;
+		i++;
+	} while (c != '\0' && i < (max_string_length - 1));
+
+	/*Se añade el carácter nulo al final del string para marcar su terminación*/
+	buffer[i] = '\0'; 
+	return buffer;
+}
+
+void serial_put_long_int (long int value, int num_digits)
+{
+	char buffer[MAX_LONG_DIGITS] = {0};
+	int i = 0;
+
+	if (value == 0) {
+		return serial_put_char('0');
+	} else if (value < 0) {
+		serial_put_char('-');
+		value = -value; // Usar valor absoluto
+	}
+
+	while (value != 0) {
+		buffer[i] = value % 10;
+		value /= 10;
+		i++;
+	}
+
+	if (num_digits < 1 || num_digits > MAX_LONG_DIGITS)
+		num_digits = i;
+
+	for (int j = num_digits - 1; j > -1; j--)
+		serial_put_char(48 + buffer[j]);
+}
 
 void serial_put_int (int value, int num_digits)
 {
 	if (num_digits > MAX_INT_DIGITS)
 		num_digits = MAX_INT_DIGITS;
 
-        char buffer[10] = {0};
-        int i = 0;
+	return serial_put_long_int(value, num_digits);
+}
 
-        if (value == 0) {
-                return serial_put_char('0');
-        } else if (value < 0) {
-                serial_put_char('-');
-                value = -value; // Usar valor absoluto
-        }
+void serial_put_double (double value, int int_digits, int frac_digits)
+{
+	long int int_value = (long int) value;
+	double frac_value = value - int_value;
+	int frac_digit = 0;
 
-        while (value != 0) {
-                buffer[i] = value % 10;
-                value /= 10;
-                i++;
-        }
+	serial_put_long_int(int_value, int_digits);
+	serial_put_char('.');
 
-        if (num_digits < 1 || num_digits > MAX_LONG_DIGITS)
-                num_digits = i;
+	if (frac_digits > MAX_DOUBLE_PRECISION)
+		frac_digits = MAX_DOUBLE_PRECISION;
+	else if (frac_digits < 1)
+		frac_digits = 1;
 
-        for (int j = num_digits - 1; j > -1; j--)
-                serial_put_char(48 + buffer[j]);
+	if (frac_value < 0)
+		frac_value = -frac_value;
 
+	for (int i = 0; i < frac_digits; i++) {
+		frac_value *= 10;
+		frac_digit = (int) frac_value;
+		serial_put_char(48 + (char) frac_value);
+		frac_value -= frac_digit;
+	}
+}
+
+char serial_recibido(void)
+{
+	/* COMPLETAR */
 }
 

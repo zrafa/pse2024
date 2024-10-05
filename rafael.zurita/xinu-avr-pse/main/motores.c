@@ -5,10 +5,15 @@
 #include "globals.h"
 #include "ultrasound.h"
 
-void serial_init(void);
-void serial_put_str(const char *str);
-void serial_put_int (int v, int cant_digitos);
+void motor_init(void)
+{
+        /* pines de motores, motor stop */
+        gpio_pin(MOTOR_DER_PIN, OFF);
+        gpio_output(MOTOR_DER_PIN);
+        gpio_pin(MOTOR_IZQ_PIN, OFF);
+        gpio_output(MOTOR_IZQ_PIN);
 
+}
 
 void motor_stop(void) 
 {
@@ -17,7 +22,7 @@ void motor_stop(void)
         gpio_output(MOTOR_IZQ_PIN);
 	gpio_pin(MOTOR_DER_PIN, OFF);
 	gpio_pin(MOTOR_IZQ_PIN, OFF);
-	serial_put_str("stop motores\n\r");
+	serial_put_str("stop\n\r");
 }
 
 
@@ -36,12 +41,14 @@ int motor_izq(void)
 	int distancia_der;
 	int res;
 
-	distancia_izq = ultrasound_get(9,9);
-	distancia_der = ultrasound_get(8,8);
+	// distancia_izq = ultrasound_get(9,9);
+	// distancia_der = ultrasound_get(8,8);
+	distancia_izq = ultrasound_get(8,8);
+	distancia_der = 4;
 	if (distancia_izq > 3) {
         	gpio_output(MOTOR_IZQ_PIN);
 		gpio_pin(MOTOR_IZQ_PIN, ON);
-		serial_put_str("izquierda\n\r");
+		serial_put_str("izq\n\r");
 		res = 0;
 	} else {
 		motor_stop();
@@ -57,12 +64,14 @@ int motor_der(void)
 	int distancia_der;
 	int res;
 
-	distancia_izq = ultrasound_get(9,9);
+	// distancia_izq = ultrasound_get(9,9);
+	// distancia_der = ultrasound_get(8,8);
+	distancia_izq = 4;
 	distancia_der = ultrasound_get(8,8);
 	if (distancia_der > 3) {
         	gpio_output(MOTOR_DER_PIN);
 		gpio_pin(MOTOR_DER_PIN, ON);
-		serial_put_str("derecha\n\r");
+		serial_put_str("der\n\r");
 		res = 0;
 	} else {
 		motor_stop();

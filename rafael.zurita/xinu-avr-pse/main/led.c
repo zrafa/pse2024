@@ -12,11 +12,13 @@ void led(void) {
 	
 	while (1) {
 
+		if (encendido) {
 		for (i=0; i<dia; i++) {
 			gpio_pin(LED, ON);
 			sleepms(500);
 			gpio_pin(LED, OFF);
 			sleepms(500);
+		}
 		}
 
 		sleep(2);
