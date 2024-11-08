@@ -43,9 +43,11 @@ int motor_izq(void)
 
 	// distancia_izq = ultrasound_get(9,9);
 	// distancia_der = ultrasound_get(8,8);
-	distancia_izq = ultrasound_get(8,8);
+	// distancia_izq = ultrasound_get(8,8);
+	distancia_izq = ultrasound_get(9,9);
+	// distancia_izq = 2;
 	distancia_der = 4;
-	if (distancia_izq > 3) {
+	if ((distancia_izq > 3) || (distancia_izq == -1)) {
         	gpio_output(MOTOR_IZQ_PIN);
 		gpio_pin(MOTOR_IZQ_PIN, ON);
 		serial_put_str("izq\n\r");
@@ -66,9 +68,9 @@ int motor_der(void)
 
 	// distancia_izq = ultrasound_get(9,9);
 	// distancia_der = ultrasound_get(8,8);
+	distancia_der = ultrasound_get(6,6);
 	distancia_izq = 4;
-	distancia_der = ultrasound_get(8,8);
-	if (distancia_der > 3) {
+	if ((distancia_der > 3) || (distancia_der == -1)) {
         	gpio_output(MOTOR_DER_PIN);
 		gpio_pin(MOTOR_DER_PIN, ON);
 		serial_put_str("der\n\r");

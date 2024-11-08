@@ -10,7 +10,8 @@
 #include <util/delay.h>
 #include "gpio.h"
 
-#define TIME_OUT_US 36000
+// #define TIME_OUT_US 36000
+#define TIME_OUT_US 32000
 #define TRIGGER_PULSE_WIDE_US 10
 #define TIME_DISTANCE_RELATION 58
 #define TIME_BETWEEN_SCANS_US 5
