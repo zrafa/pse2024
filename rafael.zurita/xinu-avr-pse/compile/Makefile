@@ -8,11 +8,11 @@
 #									#
 #########################################################################
 
-PLATFORM	=	-Dlgt8f328p
-HZ		=	4000000
+# PLATFORM	=	-Dlgt8f328p
+# HZ		=	4000000
 
-# PLATFORM	=	-DATMEGA
-# HZ		=	16000000
+PLATFORM	=	-DATMEGA
+HZ		=	16000000
 
 COMPILER_ROOT	=	avr-
 PNAME		=	ATMEGA328P
@@ -139,7 +139,7 @@ examine-header:
 
 flash:
 	avr-objcopy -O ihex -R .eeprom $(XINU) $(XINUHEX)
-	avrdude -p atmega328p -c arduino -P `ls -1 /dev/ttyUSB* /dev/ttyACM* 2>/dev/null | head -1` -b 115200 -D -U flash:w:$(XINUHEX):i 
+	avrdude -p atmega328p -c arduino -P `ls -1 /dev/ttyUSB* /dev/ttyACM* 2>/dev/null | head -1` -b 57600 -D -U flash:w:$(XINUHEX):i 
 
 
 qemu:

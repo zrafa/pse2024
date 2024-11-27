@@ -68,7 +68,8 @@ void brazo(void) {
 
 	   if (encendido) {
 		estado = START;
-		mover_init();
+		//mover_init();
+		posicion = DER;
 		for (i=1; i<DIAS; i++) {
 			dia = i;
 
@@ -93,8 +94,8 @@ void brazo(void) {
 		}
 		estado = APAGADO;
 	   }
-	   // serial_put_str("esperamos dia\n\r");
-	   sleep(2);
+	   serial_put_str("14");
+	   sleepms(2000);
 	 }
 }
 

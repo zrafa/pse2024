@@ -76,8 +76,8 @@ void	nulluser()
 	
 	/* main */
 
-	// resume(create((void *)main, 440, INITPRIO, "main", 0, NULL));
-	resume(create((void *)main, 512, INITPRIO, "main", 0, NULL));
+	resume(create((void *)main, 440, INITPRIO, "main", 0, NULL));
+	//resume(create((void *)main, 512, INITPRIO, "main", 0, NULL));
 
 	/* nullprocess continues here */
 	for(;;);

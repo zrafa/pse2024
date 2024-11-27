@@ -30,10 +30,8 @@ void main(void) {
 	serial_init();
 	motor_init();
 
-	dia = 0;
-	encendido = 0;
 	resume(create((void *)led, 64, 20, "led", 0, NULL));
-	resume(create((void *)brazo, 256, 20, "bra", 0, NULL));
+	resume(create((void *)brazo, 440, 20, "bra", 0, NULL));
 
 	int n;	/* n veces pulsador global */ 
 	int distancia_izq = 0;
